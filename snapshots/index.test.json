@@ -1,42 +1,66 @@
 {
   "default": [
-    "\u001b[38;5;160mHello there, I should be RED\u001b[0m",
-    "\u001b[32mHello there, I should be GREEN\u001b[0m",
-    "\u001b[38;5;227mHello there, I should be YELLOW\u001b[0m",
-    "\u001b[34mHello there, I should be BLUE\u001b[0m",
-    "\u001b[35mHello there, I should be PURPLE\u001b[0m",
-    "\u001b[96mHello there, I should be CYAN\u001b[0m",
-    "\u001b[95mHello there, I should be PINK\u001b[0m",
-    "\u001b[93mHello there, I should be ORANGE\u001b[0m"
+    "\u001b[38;5;160m██████████ RED\u001b[0m",
+    "\u001b[32m██████████ GREEN\u001b[0m",
+    "\u001b[38;5;227m██████████ YELLOW\u001b[0m",
+    "\u001b[34m██████████ BLUE\u001b[0m",
+    "\u001b[35m██████████ PURPLE\u001b[0m",
+    "\u001b[96m██████████ CYAN\u001b[0m",
+    "\u001b[95m██████████ PINK\u001b[0m",
+    "\u001b[93m██████████ ORANGE\u001b[0m"
   ],
   "pastel": [
-    "\u001b[31mHello there, I should be RED\u001b[0m",
-    "\u001b[38;5;49mHello there, I should be GREEN\u001b[0m",
-    "\u001b[33mHello there, I should be YELLOW\u001b[0m",
-    "\u001b[38;5;39mHello there, I should be BLUE\u001b[0m",
-    "\u001b[38;5;147mHello there, I should be PURPLE\u001b[0m",
-    "\u001b[38;5;159mHello there, I should be CYAN\u001b[0m",
-    "\u001b[38;5;219mHello there, I should be PINK\u001b[0m",
-    "\u001b[38;5;209mHello there, I should be ORANGE\u001b[0m"
+    "\u001b[31m██████████ RED\u001b[0m",
+    "\u001b[38;5;49m██████████ GREEN\u001b[0m",
+    "\u001b[33m██████████ YELLOW\u001b[0m",
+    "\u001b[38;5;39m██████████ BLUE\u001b[0m",
+    "\u001b[38;5;147m██████████ PURPLE\u001b[0m",
+    "\u001b[38;5;159m██████████ CYAN\u001b[0m",
+    "\u001b[38;5;219m██████████ PINK\u001b[0m",
+    "\u001b[38;5;209m██████████ ORANGE\u001b[0m"
   ],
   "lush": [
-    "\u001b[38;5;196mHello there, I should be RED\u001b[0m",
-    "\u001b[38;5;154mHello there, I should be GREEN\u001b[0m",
-    "\u001b[38;5;226mHello there, I should be YELLOW\u001b[0m",
-    "\u001b[38;5;57mHello there, I should be BLUE\u001b[0m",
-    "\u001b[38;5;128mHello there, I should be PURPLE\u001b[0m",
-    "\u001b[38;5;87mHello there, I should be CYAN\u001b[0m",
-    "\u001b[38;5;198mHello there, I should be PINK\u001b[0m",
-    "\u001b[38;5;202mHello there, I should be ORANGE\u001b[0m"
+    "\u001b[38;5;196m██████████ RED\u001b[0m",
+    "\u001b[38;5;154m██████████ GREEN\u001b[0m",
+    "\u001b[38;5;226m██████████ YELLOW\u001b[0m",
+    "\u001b[38;5;57m██████████ BLUE\u001b[0m",
+    "\u001b[38;5;128m██████████ PURPLE\u001b[0m",
+    "\u001b[38;5;87m██████████ CYAN\u001b[0m",
+    "\u001b[38;5;198m██████████ PINK\u001b[0m",
+    "\u001b[38;5;202m██████████ ORANGE\u001b[0m"
   ],
   "standard": [
-    "\u001b[38;5;9mHello there, I should be RED\u001b[0m",
-    "\u001b[38;5;10mHello there, I should be GREEN\u001b[0m",
-    "\u001b[38;5;11mHello there, I should be YELLOW\u001b[0m",
-    "\u001b[38;5;27mHello there, I should be BLUE\u001b[0m",
-    "\u001b[38;5;105mHello there, I should be PURPLE\u001b[0m",
-    "\u001b[38;5;123mHello there, I should be CYAN\u001b[0m",
-    "\u001b[38;5;200mHello there, I should be PINK\u001b[0m",
-    "\u001b[38;5;202mHello there, I should be ORANGE\u001b[0m"
+    "\u001b[38;5;9m██████████ RED\u001b[0m",
+    "\u001b[38;5;10m██████████ GREEN\u001b[0m",
+    "\u001b[38;5;11m██████████ YELLOW\u001b[0m",
+    "\u001b[38;5;27m██████████ BLUE\u001b[0m",
+    "\u001b[38;5;105m██████████ PURPLE\u001b[0m",
+    "\u001b[38;5;123m██████████ CYAN\u001b[0m",
+    "\u001b[38;5;200m██████████ PINK\u001b[0m",
+    "\u001b[38;5;202m██████████ ORANGE\u001b[0m"
+  ],
+  "beach": [
+    "\u001b[38;2;254;74;73m██████████ RED\u001b[0m",
+    "\u001b[38;2;42;183;202m██████████ GREEN\u001b[0m",
+    "\u001b[38;2;254;215;102m██████████ YELLOW\u001b[0m",
+    "\u001b[38;2;146;196;238m██████████ BLUE\u001b[0m",
+    "\u001b[38;2;130;119;249m██████████ PURPLE\u001b[0m",
+    "\u001b[m██████████ CYAN\u001b[0m",
+    "\u001b[38;2;222;82;133m██████████ PINK\u001b[0m",
+    "\u001b[m██████████ ORANGE\u001b[0m"
+  ],
+  "custom": [
+    "\u001b[38;2;117;4;4m██████████ RED\u001b[0m",
+    "\u001b[38;2;27;117;4m██████████ GREEN\u001b[0m",
+    "\u001b[38;2;146;150;5m██████████ YELLOW\u001b[0m",
+    "\u001b[38;2;4;19;130m██████████ BLUE\u001b[0m",
+    "\u001b[38;2;98;1;130m██████████ PURPLE\u001b[0m",
+    "\u001b[38;2;2;118;120m██████████ CYAN\u001b[0m",
+    "\u001b[38;2;163;3;155m██████████ PINK\u001b[0m",
+    "\u001b[38;2;179;114;2m██████████ ORANGE\u001b[0m"
+  ],
+  "custom symbols": [
+    "\u001b[32mthis is \u001b[32;1mbold\u001b[0m\u001b[32m\u001b[0m",
+    "\u001b[38;5;160mthis is \u001b[38;5;160;7minverted\u001b[0m\u001b[38;5;160m\u001b[0m"
   ]
 }

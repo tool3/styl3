@@ -1,6 +1,7 @@
 export type ColorMap = Record<string, number>;
-export type Options = {
+export type StyleConfiguration = {
     theme?: string;
-}
+    colors?: Record<string, number | number[]>;
+};
 
-export default function ztyle(colorMap?: ColorMap, options?: Options): Record<string, any>;
+export default function style(config: StyleConfiguration): Record<string, any>;

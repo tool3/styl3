@@ -2,27 +2,29 @@ const RESET = '\x1b[0m';
 
 function hexToRgb(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
 }
 
 function rgbToAnsi(r, g, b, txt) {
-  return `\x1b[38;2;${r};${g};${b}m${txt || ''}${txt ? RESET: ''}`;
+  return `\x1b[38;2;${r};${g};${b}m${txt || ''}${txt ? RESET : ''}`;
 }
 
 function makeColors(codes) {
   return Object.keys(codes).reduce((acc, code) => {
     let value = codes[String(code)];
     if (Array.isArray(value)) value = value.join(';');
-    if (typeof value === "string" && value.toString().includes('#')) {
-      const {r, g, b} = hexToRgb(value);
+    if (typeof value === 'string' && value.toString().includes('#')) {
+      const { r, g, b } = hexToRgb(value);
       value = rgbToAnsi(r, g, b);
       acc[code] = value;
       return acc;
-    };
+    }
     if (typeof value === 'object') {
       acc[code] = makeColors(value);
       return acc;
@@ -32,26 +34,31 @@ function makeColors(codes) {
   }, {});
 }
 
-function makeFunctions(colorMap) {
-  return Object.keys(colorMap).reduce((acc, color) => {
-    if (typeof colorMap[color] === 'object') {
-      acc[color] = makeFunctions(colorMap[color]);
+function makeFunctions(colors, symbols) {
+  return Object.keys(colors).reduce((acc, color) => {
+    if (typeof colors[color] === 'object') {
+      acc[color] = makeFunctions(colors[color], symbols);
       return acc;
     }
     acc[color] = function (txt, ...args) {
       let value = txt;
       if (args.length > 0) {
         value = args.map((arg, i) => txt[i] + arg).join('');
-      } else if (Array.isArray(txt)) { 
-        value = txt[0]; 
+      } else if (Array.isArray(txt)) {
+        value = txt[0];
       }
-      let formattedColor = colorMap[color];
-      Object.keys(symbols).forEach(key => {
+      let formattedColor = colors[color];
+      Object.keys(symbols).forEach((key) => {
         const regexString = `\\${key}(.*?)\\` + key;
         const regex = new RegExp(regexString, 'g');
         if (value.match(regex)) {
           const [subject, stripped] = regex.exec(value);
-          value = value.replace(subject, decorators[symbols[key]](formattedColor + stripped + RESET + formattedColor))
+          value = value.replace(
+            subject,
+            decorators[symbols[key]](
+              formattedColor + stripped + RESET + formattedColor
+            )
+          );
         }
       });
       return `${formattedColor}${value}${RESET}`;
@@ -60,7 +67,7 @@ function makeFunctions(colorMap) {
   }, {});
 }
 
-const colors = {
+const colorMap = {
   red: [38, 5, 160],
   green: 32,
   yellow: [38, 5, 227],
@@ -108,7 +115,7 @@ const colors = {
     lavender: '#957DAD',
     violet: '#D291BC',
     candy: '#FEC8D8',
-    lumber: '#FFDFD3'
+    lumber: '#FFDFD3',
   },
   sunset: {
     yellow: '#ffb400',
@@ -123,8 +130,10 @@ const colors = {
     yellow: '#fed766',
     blue: '#92C4EE',
     pink: '#de5285',
-    purple: '#8277f9'
-  }
+    purple: '#8277f9',
+    cyan: '',
+    orange: ''
+  },
 };
 
 const decorators = {
@@ -134,34 +143,36 @@ const decorators = {
   hidden: (color) => color.replace('m', ';8m'),
   underline: (color) => color.replace('m', ';4m'),
   invert: (color) => color.replace('m', ';7m'),
-}
+};
 
-const symbols = { 
+const symbolMap = {
   '*': 'bold',
   '!': 'underline',
   '~': 'dim',
   '#': 'hidden',
   '@': 'invert',
-  '^': 'blink'
-}
+  '^': 'blink',
+};
 
-function ztyle(config) {
-  const {colorMap, theme} = Object.assign({colorMap: colors, theme: ''}, config);
-  const colorCodes = makeColors(colorMap);
+function style(config) {
+  const { colors, theme, symbols } = Object.assign(
+    { colors: colorMap, symbols: symbolMap, theme: '' },
+    config
+    );
+  const colorCodes = makeColors(colors);
   const themedColors = theme ? colorCodes[theme] : colorCodes;
-  const functions = makeFunctions(themedColors);
+  const functions = makeFunctions(themedColors, symbols);
   return {
     ...colorCodes,
     ...functions,
     ...decorators,
     ...symbols,
-    rgb: (r, g, b) => txt => rgbToAnsi(r, g, b, txt),
-    hex: (hex) => txt => { 
-      const {r, g, b} = hexToRgb(hex);
+    rgb: (r, g, b) => (txt) => rgbToAnsi(r, g, b, txt),
+    hex: (hex) => (txt) => {
+      const { r, g, b } = hexToRgb(hex);
       return rgbToAnsi(r, g, b, txt);
     },
-    
   };
 }
 
-module.exports = ztyle
+module.exports = style;
