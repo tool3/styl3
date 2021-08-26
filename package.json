@@ -1,0 +1,24 @@
+{
+  "name": "styl3",
+  "version": "1.0.0",
+  "description": "cli style manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "print": "node -e \"const keys = require('./snapshots/index.test'); Object.keys(keys).map(key => console.log(key + '\\n' + keys[key].join('\\n'))) \" "
+  },
+  "keywords": [
+    "colors",
+    "ansi",
+    "format",
+    "output",
+    "themes"
+  ],
+  "author": "Tal Hayut",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.0",
+    "snaptdout": "^1.5.0"
+  }
+}

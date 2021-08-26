@@ -1,0 +1,42 @@
+{
+  "default": [
+    "\u001b[38;5;160mHello there, I should be RED\u001b[0m",
+    "\u001b[32mHello there, I should be GREEN\u001b[0m",
+    "\u001b[38;5;227mHello there, I should be YELLOW\u001b[0m",
+    "\u001b[34mHello there, I should be BLUE\u001b[0m",
+    "\u001b[35mHello there, I should be PURPLE\u001b[0m",
+    "\u001b[96mHello there, I should be CYAN\u001b[0m",
+    "\u001b[95mHello there, I should be PINK\u001b[0m",
+    "\u001b[93mHello there, I should be ORANGE\u001b[0m"
+  ],
+  "pastel": [
+    "\u001b[31mHello there, I should be RED\u001b[0m",
+    "\u001b[38;5;49mHello there, I should be GREEN\u001b[0m",
+    "\u001b[33mHello there, I should be YELLOW\u001b[0m",
+    "\u001b[38;5;39mHello there, I should be BLUE\u001b[0m",
+    "\u001b[38;5;147mHello there, I should be PURPLE\u001b[0m",
+    "\u001b[38;5;159mHello there, I should be CYAN\u001b[0m",
+    "\u001b[38;5;219mHello there, I should be PINK\u001b[0m",
+    "\u001b[38;5;209mHello there, I should be ORANGE\u001b[0m"
+  ],
+  "lush": [
+    "\u001b[38;5;196mHello there, I should be RED\u001b[0m",
+    "\u001b[38;5;154mHello there, I should be GREEN\u001b[0m",
+    "\u001b[38;5;226mHello there, I should be YELLOW\u001b[0m",
+    "\u001b[38;5;57mHello there, I should be BLUE\u001b[0m",
+    "\u001b[38;5;128mHello there, I should be PURPLE\u001b[0m",
+    "\u001b[38;5;87mHello there, I should be CYAN\u001b[0m",
+    "\u001b[38;5;198mHello there, I should be PINK\u001b[0m",
+    "\u001b[38;5;202mHello there, I should be ORANGE\u001b[0m"
+  ],
+  "standard": [
+    "\u001b[38;5;9mHello there, I should be RED\u001b[0m",
+    "\u001b[38;5;10mHello there, I should be GREEN\u001b[0m",
+    "\u001b[38;5;11mHello there, I should be YELLOW\u001b[0m",
+    "\u001b[38;5;27mHello there, I should be BLUE\u001b[0m",
+    "\u001b[38;5;105mHello there, I should be PURPLE\u001b[0m",
+    "\u001b[38;5;123mHello there, I should be CYAN\u001b[0m",
+    "\u001b[38;5;200mHello there, I should be PINK\u001b[0m",
+    "\u001b[38;5;202mHello there, I should be ORANGE\u001b[0m"
+  ]
+}
