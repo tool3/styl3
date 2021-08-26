@@ -50,6 +50,20 @@ describe('style', () => {
       await snap(data.join('\n'), 'beach');
     });
   });
+
+  describe('built-in decorators', () => {
+    it('should support double decorators', async () => {
+      const s = style();
+      const data = s.pink`I am SO *!PINK!* `;
+      await snap(data, 'double decorators');
+    });
+    it('should support all major decorators', async () => {
+      const s = style();
+      const data = s.lush.pink`*BOLD* !UNDERLINE! @INVERT@ $STRIEKOUT$ %ITALIC%`;
+      await snap(data, 'major decorators');
+    });
+  });
+
   describe('customs', () => {
     it('should support custom color theme', async () => {
       const custom = style({
@@ -72,17 +86,35 @@ describe('style', () => {
     });
     it('should support custom symbols map', async () => {
       const custom = style({
-        symbols: {
-          '-': 'bold',
-          '&': 'underline',
-          '%': 'dim',
-          ':': 'hidden',
-          '>': 'invert',
-          '<': 'blink',
+        decorators: {
+          bold: '-',
+          underline: '&',
+          dim: '%',
+          hidden: '?',
+          invert: '>',
+          blink: '<',
         },
       });
       const data = [custom.green`this is -bold-`, custom.red`this is >inverted>`];
       await snap(data.join('\n'), 'custom symbols');
+    });
+    it('should support partial custom symbols map', async () => {
+      const cc = style({
+        decorators: {
+          underline: '+'
+        },
+      });
+      const data = [cc.purple`this is +underline+`, cc.blue`this is *bold*`];
+      await snap(data.join('\n'), 'custom partial symbols');
+    });
+    it('should support partial custom color overrides', async () => {
+      const cc = style({
+        colors: {
+          green: 35
+        },
+      });
+      const data = [cc.green`I *should* be green`, cc.green`but I am so !purple!`];
+      await snap(data.join('\n'), 'custom partial color replace');
     });
   });
 });

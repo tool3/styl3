@@ -1,72 +1,5 @@
 const RESET = '\x1b[0m';
 
-function hexToRgb(hex) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
-
-function rgbToAnsi(r, g, b, txt) {
-  return `\x1b[38;2;${r};${g};${b}m${txt || ''}${txt ? RESET : ''}`;
-}
-
-function makeColors(codes) {
-  return Object.keys(codes).reduce((acc, code) => {
-    let value = codes[String(code)];
-    if (Array.isArray(value)) value = value.join(';');
-    if (typeof value === 'string' && value.toString().includes('#')) {
-      const { r, g, b } = hexToRgb(value);
-      value = rgbToAnsi(r, g, b);
-      acc[code] = value;
-      return acc;
-    }
-    if (typeof value === 'object') {
-      acc[code] = makeColors(value);
-      return acc;
-    }
-    acc[code] = `\x1b[${value}m`;
-    return acc;
-  }, {});
-}
-
-function makeFunctions(colors, symbols) {
-  return Object.keys(colors).reduce((acc, color) => {
-    if (typeof colors[color] === 'object') {
-      acc[color] = makeFunctions(colors[color], symbols);
-      return acc;
-    }
-    acc[color] = function (txt, ...args) {
-      let value = txt;
-      if (args.length > 0) {
-        value = args.map((arg, i) => txt[i] + arg).join('');
-      } else if (Array.isArray(txt)) {
-        value = txt[0];
-      }
-      let formattedColor = colors[color];
-      Object.keys(symbols).forEach((key) => {
-        const regexString = `\\${key}(.*?)\\` + key;
-        const regex = new RegExp(regexString, 'g');
-        if (value.match(regex)) {
-          const [subject, stripped] = regex.exec(value);
-          value = value.replace(
-            subject,
-            decorators[symbols[key]](
-              formattedColor + stripped + RESET + formattedColor
-            )
-          );
-        }
-      });
-      return `${formattedColor}${value}${RESET}`;
-    };
-    return acc;
-  }, {});
-}
-
 const colorMap = {
   red: [38, 5, 160],
   green: 32,
@@ -132,41 +65,121 @@ const colorMap = {
     pink: '#de5285',
     purple: '#8277f9',
     cyan: '',
-    orange: ''
+    orange: '',
   },
 };
 
-const decorators = {
+const decoratorMap = {
+  bold: '*',
+  underline: '!',
+  dim: '~',
+  hidden: '#',
+  invert: '@',
+  blink: '^',
+  italic: '%',
+  strikeout: '$'
+};
+
+const decoratorFunctions = {
   bold: (color) => color.replace('m', ';1m'),
-  blink: (color) => color.replace('m', ';5m'),
   dim: (color) => color.replace('m', ';2m'),
-  hidden: (color) => color.replace('m', ';8m'),
+  italic: (color) => color.replace('m', ';3m'),
   underline: (color) => color.replace('m', ';4m'),
+  blink: (color) => color.replace('m', ';5m'),
   invert: (color) => color.replace('m', ';7m'),
+  hidden: (color) => color.replace('m', ';8m'),
+  strikeout: (color) => color.replace('m', ';9m'),
 };
 
-const symbolMap = {
-  '*': 'bold',
-  '!': 'underline',
-  '~': 'dim',
-  '#': 'hidden',
-  '@': 'invert',
-  '^': 'blink',
-};
+function hexToRgb(hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
+}
 
-function style(config) {
-  const { colors, theme, symbols } = Object.assign(
-    { colors: colorMap, symbols: symbolMap, theme: '' },
-    config
-    );
-  const colorCodes = makeColors(colors);
+function rgbToAnsi(r, g, b, txt) {
+  return `\x1b[38;2;${r};${g};${b}m${txt || ''}${txt ? RESET : ''}`;
+}
+
+function makeColors(codes) {
+  return Object.keys(codes).reduce((acc, code) => {
+    let value = codes[String(code)];
+    if (Array.isArray(value)) value = value.join(';');
+    if (typeof value === 'string' && value.toString().includes('#')) {
+      const { r, g, b } = hexToRgb(value);
+      value = rgbToAnsi(r, g, b);
+      acc[code] = value;
+      return acc;
+    }
+    if (typeof value === 'object') {
+      acc[code] = makeColors(value);
+      return acc;
+    }
+    acc[code] = `\x1b[${value}m`;
+    return acc;
+  }, {});
+}
+
+function makeFunctions(colors, symbols) {
+  return Object.keys(colors).reduce((acc, color) => {
+    if (typeof colors[color] === 'object') {
+      acc[color] = makeFunctions(colors[color], symbols);
+      return acc;
+    }
+    acc[color] = function (txt, ...args) {
+      let value = txt;
+      if (args.length > 0) {
+        value = args.map((arg, i) => txt[i] + arg).join('');
+      } else if (Array.isArray(txt)) {
+        value = txt[0];
+      }
+      let formattedColor = colors[color];
+      Object.keys(symbols).forEach((key) => {
+        const regexString = `\\${symbols[key]}(.*?)\\` + symbols[key];
+        const regex = new RegExp(regexString, 'g');
+        if (value.match(regex)) {
+          const [subject, stripped] = regex.exec(value);
+          value = value.replace(
+            subject,
+            decoratorFunctions[key](
+              formattedColor + stripped + RESET + formattedColor
+            )
+          );
+        }
+      });
+      return `${formattedColor}${value}${RESET}`;
+    };
+    return acc;
+  }, {});
+}
+
+function getPartials(subject, map) {
+  return subject ? Object.keys(map).reduce((acc, key) => {
+    if (key in subject) {
+      acc[key] = subject[key] 
+    }
+    return acc;
+  }, map) : map;
+}
+
+function style(config = {}) {
+  const { colors, theme, decorators } = config;
+  const colorz = Object.assign({}, colorMap, colors);
+  const symbolz = Object.assign({}, decoratorMap, decorators);
+  const colorCodes = makeColors(colorz);
   const themedColors = theme ? colorCodes[theme] : colorCodes;
-  const functions = makeFunctions(themedColors, symbols);
+  if (!themedColors) throw new Error(`no such theme ${theme}`);
+  const functions = makeFunctions(themedColors, symbolz);
   return {
     ...colorCodes,
-    ...functions,
-    ...decorators,
-    ...symbols,
+    ...functions, 
+    ...decoratorFunctions,
+    ...symbolz,
     rgb: (r, g, b) => (txt) => rgbToAnsi(r, g, b, txt),
     hex: (hex) => (txt) => {
       const { r, g, b } = hexToRgb(hex);
