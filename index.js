@@ -108,8 +108,9 @@ function rgbToAnsi(r, g, b, txt) {
 
 function getValue(txt, ...args) {
   let value = txt;
-  if (args.length > 0) {
-    value = txt.map((t, i) => t + (args[i] || '')).join('');
+  const sanitizedArgs = args.filter(a => a && a !== undefined);
+  if (sanitizedArgs.length > 0) {
+    value = txt.map((t, i) => t + (sanitizedArgs[i] || '')).join('');
   } else if (Array.isArray(txt)) {
     value = txt[0];
   }
@@ -179,7 +180,7 @@ function style(config = {}) {
   const colorz = Object.assign({}, colorMap, colors);
   const symbolz = Object.assign({}, decoratorMap, decorators);
   const colorCodes = makeColors(colorz);
-  const themedColors = theme ? colorCodes[theme] : colorCodes;
+  const themedColors = theme ? Object.assign(colorCodes, colorCodes[theme]) : colorCodes;
   if (!themedColors) throw new Error(`no such theme ${theme}`);
   const functions = makeFunctions(themedColors, symbolz);
   return {

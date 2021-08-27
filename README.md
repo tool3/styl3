@@ -24,23 +24,32 @@ cli color manager
 
 ## usage
 ```javascript
-const style = require('styl3');
+const style = require('./');
+const shellfie = require('shellfie');
 const s = style();
-// use as tag functions
-console.log(s.red`this will be red`)
-// access a theme specifically
-console.log(s.pastel.green`this will be a pastel green`)
 
-const ss = style({theme: 'pastel'});
-// now `ss.green` points to the pastel green
-// allowing to change theme for the entire cli with one string
-console.log(ss.green`this will also be a pastel green`)
+(async function () {
+  const data = [];
+  data.push(s.red`this will be a default red`);
+  // access a theme specifically
+  data.push(s.pastel.green`this will be a pastel green`);
 
-// supports custom hex
-console.log(ss.hex('#de5285')`this will be a slick pink`)
-// and rgb
-console.log(ss.rgb(15, 106, 251)`this will be a rich blue`)
+  const ss = style({ theme: 'pastel' });
+  // now `ss.green` points to the pastel green
+  // allowing to change theme for the entire cli with one string
+  data.push(ss.green`also a pastel green`);
+
+  // supports custom hex
+  data.push(ss.hex('#de5285')`this will be a slick pink`);
+  // and rgb
+  data.push(ss.rgb(15, 106, 251)`this will be a rich blue`);
+  await shellfie(data, {
+    viewport: { width: 300, height: 300 },
+    name: 'themes',
+  });
+})();
 ```
+<img src="./shellfies/themes.png" width="300" height="300" />
 
 # decorators
 decorators are characters used to wrap a word and give it decorating features,
@@ -64,11 +73,22 @@ more than one decorator can be applied to a word
 
 ## usage
 ```javascript
-const style = require('styl3');
-const s = style({theme: 'lush'});
+const style = require('./');
+const shellfie = require('shellfie');
+const s = style({theme: 'pastel'});
 
-// use decorators for bold, underline etc...
-console.log(s.red`this will be a lush *BOLD* @RED@`)
-console.log(s.cyan`!this will all be underlined!`)
-console.log(s.green`$59$$ 29$ !`)
+(async function() {
+  const data = [];
+  // use decorators for bold, underline etc...
+  data.push(s.red`lush *BOLD* @RED@`)
+  // double decoratros
+  data.push(s.cyan`this is !*important*!`)
+  data.push(s.green`viva la %italia%`)
+  data.push(s.pink`address: ~you@somewhere.earth~`)
+  await shellfie(data, {
+      viewport: { width: 300, height: 300 },
+      name: 'decoratorz',
+    });
+})()
 ```
+<img src="./shellfies/decorators.png" width="300" height="300" />
