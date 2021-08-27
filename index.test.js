@@ -15,7 +15,7 @@ function createPhrases(styles) {
   ];
   return Object.keys(styles).reduce((acc, key) => {
     if (colors.includes(key)) {
-      acc.push(styles[key]`██████████ ${key.toUpperCase()}`);
+      acc.push(styles[key]`${key.toUpperCase()} ██████████`);
     }
     return acc;
   }, []);

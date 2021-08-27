@@ -64,8 +64,8 @@ const colorMap = {
     blue: '#92C4EE',
     pink: '#de5285',
     purple: '#8277f9',
-    cyan: '',
-    orange: '',
+    cyan: '#00FFFF',
+    orange: '#F77E02',
   },
 };
 
@@ -106,6 +106,17 @@ function rgbToAnsi(r, g, b, txt) {
   return `\x1b[38;2;${r};${g};${b}m${txt || ''}${txt ? RESET : ''}`;
 }
 
+function getValue(txt, ...args){
+  console.log(txt, args);
+  let value = txt;
+  if (args.length > 0) {
+    value = txt.map((t, i) => t + (args[i] || '')).join('');
+  } else if (Array.isArray(txt)) {
+    value = txt[0];
+  }
+  return value;
+}
+
 function makeColors(codes) {
   return Object.keys(codes).reduce((acc, code) => {
     let value = codes[String(code)];
@@ -131,13 +142,8 @@ function makeFunctions(colors, symbols) {
       acc[color] = makeFunctions(colors[color], symbols);
       return acc;
     }
-    acc[color] = function (txt, ...args) {
-      let value = txt;
-      if (args.length > 0) {
-        value = args.map((arg, i) => txt[i] + arg).join('');
-      } else if (Array.isArray(txt)) {
-        value = txt[0];
-      }
+    acc[color] = function (txt, args) {
+      let value = getValue(txt, args);
       let formattedColor = colors[color];
       Object.keys(symbols).forEach((key) => {
         const regexString = `\\${symbols[key]}(.*?)\\` + symbols[key];
@@ -180,10 +186,14 @@ function style(config = {}) {
     ...functions, 
     ...decoratorFunctions,
     ...symbolz,
-    rgb: (r, g, b) => (txt) => rgbToAnsi(r, g, b, txt),
-    hex: (hex) => (txt) => {
+    rgb: (r, g, b) => (txt, args) => { 
+      const value = getValue(txt, args);
+      return rgbToAnsi(r, g, b, value) 
+    },
+    hex: (hex) => (txt, args) => {
+      const value = getValue(txt, args);
       const { r, g, b } = hexToRgb(hex);
-      return rgbToAnsi(r, g, b, txt);
+      return rgbToAnsi(r, g, b, value);
     },
   };
 }
