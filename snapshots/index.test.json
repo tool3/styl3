@@ -48,5 +48,33 @@
     "\u001b[38;2;0;255;255mCYAN    ██████████\u001b[0m",
     "\u001b[38;2;222;82;133mPINK    ██████████\u001b[0m",
     "\u001b[38;2;247;126;2mORANGE  ██████████\u001b[0m"
+  ],
+  "double decorators": [
+    "\u001b[95mI am SO \u001b[95;1m\u001b[95;4mPINK\u001b[0m\u001b[95m\u001b[0m\u001b[95m \u001b[0m"
+  ],
+  "major decorators": [
+    "\u001b[38;5;198m\u001b[38;5;198;1mBOLD\u001b[0m\u001b[38;5;198m \u001b[38;5;198;4mUNDERLINE\u001b[0m\u001b[38;5;198m \u001b[38;5;198;7mINVERT\u001b[0m\u001b[38;5;198m \u001b[38;5;198;9mSTRIEKOUT\u001b[0m\u001b[38;5;198m \u001b[38;5;198;3mITALIC\u001b[0m\u001b[38;5;198m\u001b[0m"
+  ],
+  "custom": [
+    "\u001b[38;2;117;4;4mRED     ██████████\u001b[0m",
+    "\u001b[38;2;27;117;4mGREEN   ██████████\u001b[0m",
+    "\u001b[38;2;146;150;5mYELLOW  ██████████\u001b[0m",
+    "\u001b[38;2;4;19;130mBLUE    ██████████\u001b[0m",
+    "\u001b[38;2;98;1;130mPURPLE  ██████████\u001b[0m",
+    "\u001b[38;2;2;118;120mCYAN    ██████████\u001b[0m",
+    "\u001b[38;2;163;3;155mPINK    ██████████\u001b[0m",
+    "\u001b[38;2;179;114;2mORANGE  ██████████\u001b[0m"
+  ],
+  "custom symbols": [
+    "\u001b[32mthis is \u001b[32;1mbold\u001b[0m\u001b[32m\u001b[0m",
+    "\u001b[38;5;160mthis is \u001b[38;5;160;7minverted\u001b[0m\u001b[38;5;160m\u001b[0m"
+  ],
+  "custom partial symbols": [
+    "\u001b[35mthis is \u001b[35;4munderline\u001b[0m\u001b[35m\u001b[0m",
+    "\u001b[34mthis is \u001b[34;1mbold\u001b[0m\u001b[34m\u001b[0m"
+  ],
+  "custom partial color replace": [
+    "\u001b[35mI \u001b[35;1mshould\u001b[0m\u001b[35m be green\u001b[0m",
+    "\u001b[35mbut I am so \u001b[35;4mpurple\u001b[0m\u001b[35m\u001b[0m"
   ]
 }
