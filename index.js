@@ -1,6 +1,7 @@
 const RESET = '\x1b[0m';
 
 const colorMap = {
+  reset: 0,
   red: [38, 5, 160],
   green: 32,
   yellow: [38, 5, 227],
@@ -8,15 +9,14 @@ const colorMap = {
   purple: 35,
   cyan: 96,
   pink: 95,
-  orange: 93,
+  orange: [38, 5, 215],
   marine: 94,
   white: 97,
   black: 30,
-  reset: 0,
   pastel: {
     red: 31,
     green: [38, 5, 49],
-    yellow: 33,
+    yellow: [38, 5, 228],
     blue: [38, 5, 39],
     purple: [38, 5, 147],
     cyan: [38, 5, 159],
@@ -41,7 +41,7 @@ const colorMap = {
     purple: [38, 5, 105],
     cyan: [38, 5, 123],
     pink: [38, 5, 200],
-    orange: [38, 5, 202],
+    orange: [38, 5, 214],
   },
   pinkish: {
     thistle: '#E0BBE4',
@@ -77,7 +77,7 @@ const decoratorMap = {
   invert: '@',
   blink: '^',
   italic: '%',
-  strikeout: '$'
+  strikeout: '$',
 };
 
 const decoratorFunctions = {
@@ -106,7 +106,7 @@ function rgbToAnsi(r, g, b, txt) {
   return `\x1b[38;2;${r};${g};${b}m${txt || ''}${txt ? RESET : ''}`;
 }
 
-function getValue(txt, ...args){
+function getValue(txt, ...args) {
   let value = txt;
   if (args.length > 0) {
     value = txt.map((t, i) => t + (args[i] || '')).join('');
@@ -164,12 +164,14 @@ function makeFunctions(colors, symbols) {
 }
 
 function getPartials(subject, map) {
-  return subject ? Object.keys(map).reduce((acc, key) => {
-    if (key in subject) {
-      acc[key] = subject[key] 
-    }
-    return acc;
-  }, map) : map;
+  return subject
+    ? Object.keys(map).reduce((acc, key) => {
+        if (key in subject) {
+          acc[key] = subject[key];
+        }
+        return acc;
+      }, map)
+    : map;
 }
 
 function style(config = {}) {
@@ -182,12 +184,12 @@ function style(config = {}) {
   const functions = makeFunctions(themedColors, symbolz);
   return {
     ...colorCodes,
-    ...functions, 
+    ...functions,
     ...decoratorFunctions,
     ...symbolz,
-    rgb: (r, g, b) => (txt, args) => { 
+    rgb: (r, g, b) => (txt, args) => {
       const value = getValue(txt, args);
-      return rgbToAnsi(r, g, b, value) 
+      return rgbToAnsi(r, g, b, value);
     },
     hex: (hex) => (txt, args) => {
       const value = getValue(txt, args);

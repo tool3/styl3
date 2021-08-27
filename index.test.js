@@ -13,9 +13,11 @@ function createPhrases(styles) {
     'pink',
     'orange',
   ];
+  const maxLabelLength = 6;
   return Object.keys(styles).reduce((acc, key) => {
     if (colors.includes(key)) {
-      acc.push(styles[key]`${key.toUpperCase()} ██████████`);
+      const space = ' '.repeat((maxLabelLength - key.length) + 2);
+      acc.push(styles[key]`${key.toUpperCase() + space}██████████`);
     }
     return acc;
   }, []);

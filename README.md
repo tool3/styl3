@@ -12,11 +12,15 @@ cli color manager
 5 unique built-in themes to get you started on easy cli styling    
 [![](https://img.shields.io/static/v1?label=created%20with%20shellfie&message=📸&color=pink)](https://github.com/tool3/shellfie)  
 
-![](./shellfies/default.png)
-![](./shellfies/pastel.png)
-![](./shellfies/lush.png)
-![](./shellfies/standard.png)
-![](./shellfies/beach.png)     
+<div>
+  <img src="./shellfies/default.png" width="300" height="300" />
+  <img src="./shellfies/standard.png" width="300" height="300" />
+</div>
+<div>
+  <img src="./shellfies/pastel.png" width="300" height="300" />
+  <img src="./shellfies/lush.png" width="300" height="300" />
+  <img src="./shellfies/beach.png" width="300" height="300" />
+</div>
 
 ## usage
 ```javascript
