@@ -107,7 +107,6 @@ function rgbToAnsi(r, g, b, txt) {
 }
 
 function getValue(txt, ...args){
-  console.log(txt, args);
   let value = txt;
   if (args.length > 0) {
     value = txt.map((t, i) => t + (args[i] || '')).join('');

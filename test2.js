@@ -14,3 +14,7 @@ console.log(ss.green`this will be pastel green`)
 console.log(ss.hex('#de5285')`this will be a slick pink`)
 // and rgb
 console.log(ss.rgb(15, 106, 251)`this will be a rich blue`)
+// use decorators for bold, underline etc...
+console.log(s.red`this will be a lush *BOLD* @RED@`)
+console.log(s.cyan`!this will all be underlined!`)
+console.log(s.green`$59$$ 29$ !`)
