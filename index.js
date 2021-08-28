@@ -184,7 +184,7 @@ function style(config = {}) {
   if (!themedColors) throw new Error(`no such theme ${theme}`);
   const functions = makeFunctions(themedColors, symbolz);
   return {
-    ...colorCodes,
+    colors: {...colorCodes},
     ...functions,
     ...decoratorFunctions,
     ...symbolz,
