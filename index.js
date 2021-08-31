@@ -6,7 +6,7 @@ const colorMap = {
   green: 32,
   yellow: [38, 5, 227],
   blue: 34,
-  purple: 35,
+  purple: [38, 5, 57],
   cyan: 96,
   pink: 95,
   orange: [38, 5, 215],
@@ -164,17 +164,6 @@ function makeFunctions(colors, symbols) {
   }, {});
 }
 
-function getPartials(subject, map) {
-  return subject
-    ? Object.keys(map).reduce((acc, key) => {
-        if (key in subject) {
-          acc[key] = subject[key];
-        }
-        return acc;
-      }, map)
-    : map;
-}
-
 function style(config = {}) {
   const { colors, theme, decorators } = config;
   const colorz = Object.assign({}, colorMap, colors);
@@ -196,6 +185,10 @@ function style(config = {}) {
       const value = getValue(txt, args);
       const { r, g, b } = hexToRgb(hex);
       return rgbToAnsi(r, g, b, value);
+    },
+    ansi: (ansi) => (txt, args) => {
+      const value = getValue(txt, args);
+      return `${ansi}${value}${RESET}`
     },
   };
 }
