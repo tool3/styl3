@@ -1,5 +1,5 @@
 # styl3
-cli color manager
+themeable cli coloring
 
 # features
 - built-in themes available
