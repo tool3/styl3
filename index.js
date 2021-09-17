@@ -6,9 +6,9 @@ const colorMap = {
   green: 32,
   yellow: [38, 5, 227],
   blue: 34,
-  purple: [38, 5, 57],
+  purple: 35,
   cyan: 96,
-  pink: 95,
+  pink: [38, 5, 219],
   orange: [38, 5, 215],
   marine: 94,
   white: 97,
@@ -80,7 +80,7 @@ const decoratorMap = {
   strikeout: '$',
 };
 
-const decoratorFunctions = {
+const symbolsFunctions = {
   bold: (color) => color.replace('m', ';1m'),
   dim: (color) => color.replace('m', ';2m'),
   italic: (color) => color.replace('m', ';3m'),
@@ -89,6 +89,20 @@ const decoratorFunctions = {
   invert: (color) => color.replace('m', ';7m'),
   hidden: (color) => color.replace('m', ';8m'),
   strikeout: (color) => color.replace('m', ';9m'),
+};
+
+const decoratorFunctions = {
+  bold: (txt, ...args) => getValue(txt, ...args).replace('m', ';1m'),
+  dim: (txt, ...args) => {
+    const value = getValue(txt, ...args);
+    return `\x1b[;2m${value}${RESET}`;
+  },
+  italic: (txt, ...args) => getValue(txt, ...args).replace('m', ';3m'),
+  underline: (txt, ...args) => getValue(txt, ...args).replace('m', ';4m'),
+  blink: (txt, ...args) => getValue(txt, ...args).replace('m', ';5m'),
+  invert: (txt, ...args) => getValue(txt, ...args).replace('m', ';7m'),
+  hidden: (txt, ...args) => getValue(txt, ...args).replace('m', ';8m'),
+  strikeout: (txt, ...args) => getValue(txt, ...args).replace('m', ';9m')
 };
 
 function hexToRgb(hex) {
@@ -107,7 +121,6 @@ function rgbToAnsi(r, g, b, txt) {
 }
 
 function getValue(txt, ...args) {
-  // console.log(txt)
   let value = txt; 
   const sanitizedArgs = args.filter(a => a && a !== undefined);
   if (sanitizedArgs.length > 0) {
@@ -154,7 +167,7 @@ function makeFunctions(colors, symbols) {
           const [subject, stripped] = regex.exec(value);
           value = value.replace(
             subject,
-            decoratorFunctions[key](
+            symbolsFunctions[key](
               formattedColor + stripped + RESET + formattedColor
             )
           );
@@ -175,21 +188,21 @@ function style(config = {}) {
   if (!themedColors) throw new Error(`no such theme ${theme}`);
   const functions = makeFunctions(themedColors, symbolz);
   return {
-    colors: {...themedColors},
+    colors: themedColors,
+    symbols: symbolz,
     ...functions,
     ...decoratorFunctions,
-    ...symbolz,
-    rgb: (r, g, b) => (txt, args) => {
-      const value = getValue(txt, args);
+    rgb: (r, g, b) => (txt, ...args) => {
+      const value = getValue(txt, ...args);
       return rgbToAnsi(r, g, b, value);
     },
-    hex: (hex) => (txt, args) => {
-      const value = getValue(txt, args);
+    hex: (hex) => (txt, ...args) => {
+      const value = getValue(txt, ...args);
       const { r, g, b } = hexToRgb(hex);
       return rgbToAnsi(r, g, b, value);
     },
-    ansi: (ansi) => (txt, args) => {
-      const value = getValue(txt, args);
+    ansi: (ansi) => (txt, ...args) => {
+      const value = getValue(txt, ...args);
       return `${ansi}${value}${RESET}`
     },
   };
