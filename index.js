@@ -107,7 +107,8 @@ function rgbToAnsi(r, g, b, txt) {
 }
 
 function getValue(txt, ...args) {
-  let value = txt;
+  // console.log(txt)
+  let value = txt; 
   const sanitizedArgs = args.filter(a => a && a !== undefined);
   if (sanitizedArgs.length > 0) {
     value = txt.map((t, i) => t + (sanitizedArgs[i] || '')).join('');
@@ -142,12 +143,13 @@ function makeFunctions(colors, symbols) {
       acc[color] = makeFunctions(colors[color], symbols);
       return acc;
     }
-    acc[color] = function (txt, args) {
-      let value = getValue(txt, args);
+    acc[color] = function (txt, ...args) {
+      let value = getValue(txt, ...args);
       let formattedColor = colors[color];
+      
       Object.keys(symbols).forEach((key) => {
-        const regexString = `\\${symbols[key]}(.*?)\\` + symbols[key];
-        const regex = new RegExp(regexString, 'g');
+        const regexString = `\\${symbols[key]}(.*)\\` + symbols[key];
+        const regex = new RegExp(regexString, 'gsm');
         if (value.match(regex)) {
           const [subject, stripped] = regex.exec(value);
           value = value.replace(
