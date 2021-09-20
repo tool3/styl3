@@ -1,7 +1,8 @@
-export type ColorMap = Record<string, number>;
-export type StyleConfiguration = {
+declare type StyleConfiguration = {
     theme?: string;
     colors?: Record<string, number | number[]>;
 };
 
-export default function style(config: StyleConfiguration): Record<string, any>;
+declare function style(config: StyleConfiguration): Record<string, any>;
+
+export = style; 
