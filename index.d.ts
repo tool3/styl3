@@ -1,5 +1,6 @@
 declare type StyleConfiguration = {
-    theme?: string;
+    theme?: 'pastel' | 'lush' | 'standard' | 'default' | 'beach' | string;
+    decorators?: Record<string, string>;
     colors?: Record<string, number | number[]>;
 };
 
