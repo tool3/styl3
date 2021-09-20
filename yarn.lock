@@ -703,10 +703,10 @@ shellfie@^1.2.8:
     xterm "^4.14.1"
     xterm-addon-fit "^0.5.0"
 
-snaptdout@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/snaptdout/-/snaptdout-2.0.0.tgz#6f8490ba0899f1ce32e0e5a84eac384528f13088"
-  integrity sha512-L6XLtt9t4LTVjpHMUqrFu6LAhZl2rUftCDFvbW0oPfkBlK6uRE9XZVRFJU5IwhArxKMHJ3RDqKfl+iXGURpyPQ==
+snaptdout@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/snaptdout/-/snaptdout-2.1.0.tgz#fb2fa3f47a8ef470adc39e2dfeefc3bec2863a81"
+  integrity sha512-kqzi5IcBxzDowvSY+l2QFEkKF9jzDPv56M9YPfmD1mYjSzPCyLwdrU6DFDUMU+N36ZQYIWWHeTI9ugPXwXK17g==
 
 "string-width@^1.0.2 || 2":
   version "2.1.1"
