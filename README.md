@@ -77,10 +77,10 @@ const style = require('styl3');
 const s = style({ theme: 'pastel' });
 
 // use decorators for bold, underline etc...
-console.log(s.red`lush *BOLD* @RED@`);
+console.log(s.red`lush red *BOLD* @INVERTED@`);
 // double decoratros
-console.log(s.cyan`this is !*important*!`);
-console.log(s.green`viva la %italia%`);
+console.log(s.cyan`this is !*bolderlined!*! get it? bold and underlined...😏`);
+console.log(s.green`viva la %italic%`);
 console.log(s.pink`address: ~you@somewhere.earth~`);
 ```
 
