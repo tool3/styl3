@@ -21,7 +21,7 @@ const colorMap = {
     purple: [38, 5, 147],
     cyan: [38, 5, 159],
     pink: [38, 5, 219],
-    orange: [38, 5, 209],
+    orange: [38, 5, 209]
   },
   lush: {
     red: [38, 5, 196],
@@ -31,7 +31,7 @@ const colorMap = {
     purple: [38, 5, 128],
     cyan: [38, 5, 87],
     pink: [38, 5, 198],
-    orange: [38, 5, 202],
+    orange: [38, 5, 202]
   },
   standard: {
     red: [38, 5, 9],
@@ -41,21 +41,21 @@ const colorMap = {
     purple: [38, 5, 105],
     cyan: [38, 5, 123],
     pink: [38, 5, 200],
-    orange: [38, 5, 214],
+    orange: [38, 5, 214]
   },
   pinkish: {
     thistle: '#E0BBE4',
     lavender: '#957DAD',
     violet: '#D291BC',
     candy: '#FEC8D8',
-    lumber: '#FFDFD3',
+    lumber: '#FFDFD3'
   },
   sunset: {
     yellow: '#ffb400',
     orange: '#e58637',
     darkOrange: '#d6423b',
     red: '#b41039',
-    bordeux: '#420c30',
+    bordeux: '#420c30'
   },
   beach: {
     red: '#fe4a49',
@@ -65,8 +65,8 @@ const colorMap = {
     pink: '#de5285',
     purple: '#8277f9',
     cyan: '#00FFFF',
-    orange: '#F77E02',
-  },
+    orange: '#F77E02'
+  }
 };
 
 const decoratorMap = {
@@ -77,18 +77,22 @@ const decoratorMap = {
   invert: '@',
   blink: '^',
   italic: '%',
-  strikeout: '$',
+  strikeout: '$'
 };
 
 const symbolsFunctions = {
   bold: (color) => color.replace('m', ';1m'),
   dim: (color) => color.replace('m', ';2m'),
   italic: (color) => color.replace('m', ';3m'),
-  underline: (color) => color.replace('m', ';4m'),
+  underline: (color) => {
+    console.log('un', color);
+    return `\x1b[0;4m${color}`;
+    // return color.replace('m', ';4m')
+  },
   blink: (color) => color.replace('m', ';5m'),
   invert: (color) => color.replace('m', ';7m'),
   hidden: (color) => color.replace('m', ';8m'),
-  strikeout: (color) => color.replace('m', ';9m'),
+  strikeout: (color) => color.replace('m', ';9m')
 };
 
 const decoratorFunctions = {
@@ -111,7 +115,7 @@ function hexToRgb(hex) {
     ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
+        b: parseInt(result[3], 16)
       }
     : null;
 }
@@ -121,8 +125,8 @@ function rgbToAnsi(r, g, b, txt) {
 }
 
 function getValue(txt, ...args) {
-  let value = txt; 
-  const sanitizedArgs = args.filter(a => a && a !== undefined);
+  let value = txt;
+  const sanitizedArgs = args.filter((a) => a && a !== undefined);
   if (sanitizedArgs.length > 0) {
     value = txt.map((t, i) => t + (sanitizedArgs[i] || '')).join('');
   } else if (Array.isArray(txt)) {
@@ -159,18 +163,17 @@ function makeFunctions(colors, symbols) {
     acc[color] = function (txt, ...args) {
       let value = getValue(txt, ...args);
       let formattedColor = colors[color];
-      
+
       Object.keys(symbols).forEach((key) => {
+        // TODO include spaces
         const regexString = `\\${symbols[key]}(.*)\\` + symbols[key];
+        // console.log(regexString);
         const regex = new RegExp(regexString, 'gsm');
         if (value.match(regex)) {
           const [subject, stripped] = regex.exec(value);
-          value = value.replace(
-            subject,
-            symbolsFunctions[key](
-              formattedColor + stripped + RESET + formattedColor
-            )
-          );
+          const replaced = symbolsFunctions[key](formattedColor + stripped + RESET + formattedColor);
+          console.log(replaced);
+          value = value.replace(subject, replaced);
         }
       });
       return `${formattedColor}${value}${RESET}`;
@@ -192,19 +195,25 @@ function style(config = {}) {
     symbols: symbolz,
     ...functions,
     ...decoratorFunctions,
-    rgb: (r, g, b) => (txt, ...args) => {
-      const value = getValue(txt, ...args);
-      return rgbToAnsi(r, g, b, value);
-    },
-    hex: (hex) => (txt, ...args) => {
-      const value = getValue(txt, ...args);
-      const { r, g, b } = hexToRgb(hex);
-      return rgbToAnsi(r, g, b, value);
-    },
-    ansi: (ansi) => (txt, ...args) => {
-      const value = getValue(txt, ...args);
-      return `${ansi}${value}${RESET}`
-    },
+    rgb:
+      (r, g, b) =>
+      (txt, ...args) => {
+        const value = getValue(txt, ...args);
+        return rgbToAnsi(r, g, b, value);
+      },
+    hex:
+      (hex) =>
+      (txt, ...args) => {
+        const value = getValue(txt, ...args);
+        const { r, g, b } = hexToRgb(hex);
+        return rgbToAnsi(r, g, b, value);
+      },
+    ansi:
+      (ansi) =>
+      (txt, ...args) => {
+        const value = getValue(txt, ...args);
+        return `${ansi}${value}${RESET}`;
+      }
   };
 }
 
