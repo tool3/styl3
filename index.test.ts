@@ -1,9 +1,9 @@
-const { describe, it } = require('mocha');
-const {expect} = require('chai')
-const snap = require('snaptdout');
-const style = require('./index');
+import { expect } from 'chai';
 
-function createPhrases(styles) {
+import snap from 'snaptdout';
+import style from './style'
+
+function createPhrases(styles: any) {
   const colors = [
     'red',
     'green',
@@ -15,7 +15,7 @@ function createPhrases(styles) {
     'orange',
   ];
   const maxLabelLength = 6;
-  return Object.keys(styles).reduce((acc, key) => {
+  return Object.keys(styles).reduce((acc: string[], key) => {
     if (colors.includes(key)) {
       const space = ' '.repeat((maxLabelLength - key.length) + 2);
       acc.push(styles[key]`${key.toUpperCase() + space}██████████`);
@@ -28,13 +28,12 @@ describe('style', () => {
   describe('built-in themes', () => {
     it('should throw for non-existing theme', async () => {
       try {
-        style({theme: 'broccoli'});  
+        style({ theme: 'broccoli' });
       } catch (error) {
-       expect(error.message).to.equal('no such theme broccoli')
+        expect(error.message).to.equal('no such theme broccoli')
       }
-      
-      
     });
+
     it('should create default theme', async () => {
       const d = style();
       const data = createPhrases(d);
