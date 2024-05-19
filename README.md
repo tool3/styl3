@@ -1,4 +1,4 @@
-# styl3
+# styl3 3.0
 
 themeable cli coloring
 

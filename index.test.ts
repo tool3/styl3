@@ -3,18 +3,19 @@ import { expect } from 'chai';
 import snap from 'snaptdout';
 import style from './style'
 
-function createPhrases(styles: any) {
-  const colors = [
-    'red',
-    'green',
-    'yellow',
-    'blue',
-    'purple',
-    'cyan',
-    'pink',
-    'orange',
-  ];
-  const maxLabelLength = 6;
+const colorList = [
+  'red',
+  'green',
+  'yellow',
+  'blue',
+  'purple',
+  'cyan',
+  'pink',
+  'orange',
+];
+
+function createPhrases(styles: any, colors: string[] = colorList) {
+  const maxLabelLength = colors.reduce((acc, key) => Math.max(acc, key.length), 0);
   return Object.keys(styles).reduce((acc: string[], key) => {
     if (colors.includes(key)) {
       const space = ' '.repeat((maxLabelLength - key.length) + 2);
@@ -56,15 +57,32 @@ describe('style', () => {
       await snap(data.join('\n'), 'standard');
     });
     it('should support beach theme', async () => {
-      const standard = style({ theme: 'beach' });
-      const data = createPhrases(standard);
+      const beach = style({ theme: 'beach' });
+      const data = createPhrases(beach);
       await snap(data.join('\n'), 'beach');
+    });
+    it('should support neon theme', async () => {
+      const neon = style({ theme: 'neon' });
+      const data = createPhrases(neon);
+      await snap(data.join('\n'), 'neon');
+    });
+    it('should support nature theme', async () => {
+      const neon = style({ theme: 'nature' });
+      const data = createPhrases(neon);
+      await snap(data.join('\n'), 'nature');
+    });
+
+    it('should support custom color names', async () => {
+      const neon = style({ theme: 'sunset' });
+      const data = createPhrases(neon, ['yellow', 'orange', 'darkOrange', 'red', 'bordeux']);
+      await snap(data.join('\n'), 'sunset');
     });
   });
 
   describe('built-in decorators', () => {
     it('should support double decorators', async () => {
       const s = style();
+
       const data = s.pink`I am SO *!PINK!* `;
       await snap(data, 'double decorators');
     });
@@ -126,6 +144,23 @@ describe('style', () => {
       });
       const data = [cc.green`I *should* be green`, cc.green`but I am so !purple!`];
       await snap(data.join('\n'), 'custom partial color replace');
+    });
+
+    it('should support partial custom color overrides with themes', async () => {
+      const cc = style({
+        theme: 'custom',
+        colors: {
+          custom: {
+            blueish: '#89CFF0',
+            orangish: '#FFC300'
+          }
+        }
+      });
+
+      
+      cc.pastel.green`hello there`
+      const data = [cc.blueish`I am blueish`, cc.orangish`but I am so !orangish!`];
+      await snap(data.join('\n'), 'custom partial color theme');
     });
   });
 });
