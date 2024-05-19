@@ -157,6 +157,8 @@ describe('style', () => {
         }
       });
 
+      // const c = style({theme: 'custom', })
+
       
       cc.pastel.green`hello there`
       const data = [cc.blueish`I am blueish`, cc.orangish`but I am so !orangish!`];

@@ -1,7 +1,7 @@
 type Color = string | number | number[];
 type TemplateStringFunction = (txt?: string | TemplateStringsArray, ...args: string[]) => string;
-
 type Theme = Partial<Colors> & { [key: string]: Color; };
+
 type DefaultThemes = {
     pastel: Theme;
     standard: Theme;
@@ -10,7 +10,7 @@ type DefaultThemes = {
     neon: Theme;
     lush: Theme;
     nature: Theme;
-
+    default: Theme;
 };
 
 export type DecoratorMap = {
@@ -24,7 +24,6 @@ export type DecoratorMap = {
     strikeout: string;
 }
 
-
 export type Colors = {
     red: Color;
     green: Color;
@@ -35,11 +34,19 @@ export type Colors = {
     orange: Color;
     marine: Color;
     [key: string]: Color | Theme;
-}
+};
 
-export type DecoratorFunctions = { [key in keyof DecoratorMap]?: TemplateStringFunction };
-export type ColorFunctions = { [key in keyof Colors]: TemplateStringFunction };
-export type ThemeFunctions = { [key in keyof DefaultThemes]: ColorFunctions };
+export type DecoratorFunctions = {
+    [key in keyof DecoratorMap]?: TemplateStringFunction
+};
+
+export type ColorFunctions = {
+    [key in keyof Colors]: TemplateStringFunction
+};
+
+export type ThemeFunctions = {
+    [key in keyof DefaultThemes]: ColorFunctions
+};
 
 export type ColorUtils = {
     rgb(r: number, g: number, b: number): TemplateStringFunction;
@@ -57,5 +64,5 @@ export type Style =
     Colors &
     ColorUtils &
     ColorFunctions &
-    ThemeFunctions & 
+    ThemeFunctions &
     DecoratorFunctions
