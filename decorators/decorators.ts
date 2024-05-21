@@ -1,6 +1,6 @@
 import { RESET } from '../colors/colors';
-import { DecoratorFunctions, DecoratorMap } from '../types/types';
 import { getValue } from '../utils/utils';
+import { DecoratorFunctions, DecoratorMap } from './types';
 
 const decoratorMap: DecoratorMap = {
     bold: '*',

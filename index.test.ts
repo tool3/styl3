@@ -151,16 +151,20 @@ describe('style', () => {
         theme: 'custom',
         colors: {
           custom: {
-            blueish: '#89CFF0',
-            orangish: '#FFC300'
-          }
+            tom: '34355',
+            g: 'ee',
+            works: '#1e1e1e'
+          },
         }
       });
 
+      cc.pastel.green`hello`
+
+      cc.custom.tom`hello`
       // const c = style({theme: 'custom', })
 
-      
-      cc.pastel.green`hello there`
+      console.log(cc.pastel.green`hello there`)
+      console.log(cc.tom`hello there`)
       const data = [cc.blueish`I am blueish`, cc.orangish`but I am so !orangish!`];
       await snap(data.join('\n'), 'custom partial color theme');
     });

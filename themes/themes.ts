@@ -1,4 +1,4 @@
-export default {
+const themes = {
     pastel: {
         red: 31,
         green: [38, 5, 49],
@@ -74,3 +74,5 @@ export default {
         bordeux: '#420c30'
     },
 }
+
+export default themes;

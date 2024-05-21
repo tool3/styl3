@@ -1,7 +1,8 @@
 import themes from '../themes/themes';
-import { Colors } from '../types/types';
+import { Colors } from '../colors/types';
 
-const colors: Colors = {
+
+const colors = {
     reset: 0,
     red: [38, 5, 160],
     green: 32,

@@ -1,6 +1,8 @@
 import colorMap, { RESET } from './colors/colors';
+import { Colors } from './colors/types';
 import { decoratorFunctions, decoratorMap, symbolsFunctions } from './decorators/decorators';
-import { Colors, Config, DecoratorMap, Style } from './types/types';
+import { DecoratorMap } from './decorators/types';
+import { Config, Style } from './types/types';
 import { getValue } from './utils/utils';
 
 function hexToRgb(hex: string) {
@@ -106,7 +108,7 @@ function ansi(ansi: string) {
     }
 }
 
-function style(config?: Config) {
+function style<T extends string, C>(config?: Config<T, C>) {
     const { colors, theme, decorators } = config || { decorators: decoratorMap, colors: colorMap, theme: 'default' };
 
     const allColors = { ...colorMap, ...colors };
@@ -116,7 +118,7 @@ function style(config?: Config) {
     const themedColors = theme ? { ...colorCodes, ...(colorCodes[theme] as Colors) } : colorCodes;
     if (!themedColors) throw new Error(`no such theme ${theme}`);
     const functions = makeFunctions(themedColors, allSymbols);
-    const styled: Style = {
+    const styled: Style<T, C> = {
         colors: themedColors,
         symbols: allSymbols,
         ...functions,

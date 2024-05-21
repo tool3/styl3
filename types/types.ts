@@ -1,68 +1,20 @@
-type Color = string | number | number[];
-type TemplateStringFunction = (txt?: string | TemplateStringsArray, ...args: string[]) => string;
-type Theme = Partial<Colors> & { [key: string]: Color; };
+import { ColorFunctions, ColorUtils, Colors, ExportedColors } from '../colors/types';
+import { DecoratorFunctions, DecoratorMap } from '../decorators/types';
+import { ThemeFunctions, ThemeWithColors } from '../themes/types';
 
-type DefaultThemes = {
-    pastel: Theme;
-    standard: Theme;
-    beach: Theme;
-    sunset: Theme;
-    neon: Theme;
-    lush: Theme;
-    nature: Theme;
-    default: Theme;
-};
+export type TemplateStringFunction = (txt?: string | TemplateStringsArray, ...args: string[]) => string;
 
-export type DecoratorMap = {
-    bold: string;
-    underline: string;
-    dim: string;
-    hidden: string;
-    invert: string;
-    blink: string;
-    italic: string;
-    strikeout: string;
-}
-
-export type Colors = {
-    red: Color;
-    green: Color;
-    blue: Color;
-    yellow: Color;
-    purple: Color;
-    pink: Color;
-    orange: Color;
-    marine: Color;
-    [key: string]: Color | Theme;
-};
-
-export type DecoratorFunctions = {
-    [key in keyof DecoratorMap]?: TemplateStringFunction
-};
-
-export type ColorFunctions = {
-    [key in keyof Colors]: TemplateStringFunction
-};
-
-export type ThemeFunctions = {
-    [key in keyof DefaultThemes]: ColorFunctions
-};
-
-export type ColorUtils = {
-    rgb(r: number, g: number, b: number): TemplateStringFunction;
-    hex(hex: string): TemplateStringFunction;
-    ansi(ansi: string): TemplateStringFunction;
-}
-
-export type Config = {
-    colors?: Partial<Colors>;
-    theme?: string;
+export type Config<T extends string, C> = {
+    colors?: Partial<ExportedColors<T, C>>;
+    theme?: keyof ThemeWithColors<T, C>;
     decorators?: Partial<DecoratorMap>
 }
 
-export type Style =
+export type Style<T extends string, C> =
     Colors &
     ColorUtils &
-    ColorFunctions &
-    ThemeFunctions &
+    ThemeWithColors<T, C> &
+
+    ColorFunctions<T, C> &
+    ThemeFunctions<T, C> &
     DecoratorFunctions
