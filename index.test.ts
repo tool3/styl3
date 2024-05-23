@@ -159,6 +159,7 @@ describe('style', () => {
       });
 
 
+      
       // console.log(cc.custom.tom`hello`)
       // cc.custom.tom`hello`
 

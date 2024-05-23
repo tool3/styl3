@@ -2,8 +2,8 @@
   "name": "styl3",
   "version": "2.2.0",
   "description": "cli style manager",
-  "main": "dist/index.js",
-  "types": "dist/types/types.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register index.test.ts",
     "build": "tsc",
