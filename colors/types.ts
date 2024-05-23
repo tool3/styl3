@@ -1,4 +1,4 @@
-import { CustomTheme, Theme } from '../themes/types';
+import { CustomTheme } from '../themes/types';
 import { TemplateStringFunction } from '../types/types';
 
 export type Color = string | number | number[];
@@ -16,7 +16,7 @@ export type Colors = {
     marine: Color;
     white: Color;
     black: Color;
-} & { [key: string]: Color | CustomTheme }
+} & { [key: string]: Color | CustomTheme };
 
 export type ExportedColors<T extends string, C> = Colors & { [key in T]: Color | CustomTheme<C> }
 

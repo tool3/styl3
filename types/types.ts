@@ -11,7 +11,7 @@ export type Config<T extends string, C> = {
 }
 
 export type Style<T extends string, C> =
-    Colors &
+    // Colors &
     ColorUtils &
     ThemeWithColors<T, C> &
 

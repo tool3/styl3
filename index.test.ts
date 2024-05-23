@@ -158,9 +158,10 @@ describe('style', () => {
         }
       });
 
-      cc.pastel.green`hello`
 
-      cc.custom.tom`hello`
+      // console.log(cc.custom.tom`hello`)
+      // cc.custom.tom`hello`
+
       // const c = style({theme: 'custom', })
 
       console.log(cc.pastel.green`hello there`)
