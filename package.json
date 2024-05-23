@@ -2,7 +2,7 @@
   "name": "styl3",
   "version": "2.0.0",
   "description": "cli style manager",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register index.test.ts",
     "build": "tsc",
@@ -16,8 +16,7 @@
     "themes"
   ],
   "files": [
-    "index.js",
-    "index.d.ts"
+    "./dist"
   ],
   "author": "Tal Hayut",
   "license": "MIT",
