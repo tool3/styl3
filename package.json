@@ -3,11 +3,13 @@
   "version": "2.1.0",
   "description": "cli style manager",
   "main": "dist/index.js",
+  "types": "dist/types/types.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register index.test.ts",
     "build": "tsc",
     "print": "node -e \"const keys = require('./snapshots/index.test'); Object.keys(keys).map(key => console.log(key + '\\n' + keys[key].join('\\n'))) \" "
   },
+
   "keywords": [
     "colors",
     "ansi",
