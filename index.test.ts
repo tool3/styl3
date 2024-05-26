@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import snap from 'snaptdout';
 import style from './style'
+import themes from './themes/themes';
 
 const colorList = [
   'red',
@@ -41,41 +42,13 @@ describe('style', () => {
       await snap(data.join('\n'), 'default');
     });
 
-    it('should support pastel theme', async () => {
-      const pastel = style({ theme: 'pastel' });
-      const data = createPhrases(pastel);
-      await snap(data.join('\n'), 'pastel');
-    });
-    it('should support lush theme', async () => {
-      const lush = style({ theme: 'lush' });
-      const data = createPhrases(lush);
-      await snap(data.join('\n'), 'lush');
-    });
-    it('should support standard theme', async () => {
-      const standard = style({ theme: 'standard' });
-      const data = createPhrases(standard);
-      await snap(data.join('\n'), 'standard');
-    });
-    it('should support beach theme', async () => {
-      const beach = style({ theme: 'beach' });
-      const data = createPhrases(beach);
-      await snap(data.join('\n'), 'beach');
-    });
-    it('should support neon theme', async () => {
-      const neon = style({ theme: 'neon' });
-      const data = createPhrases(neon);
-      await snap(data.join('\n'), 'neon');
-    });
-    it('should support nature theme', async () => {
-      const neon = style({ theme: 'nature' });
-      const data = createPhrases(neon);
-      await snap(data.join('\n'), 'nature');
-    });
-
-    it('should support custom color names', async () => {
-      const neon = style({ theme: 'sunset' });
-      const data = createPhrases(neon, ['yellow', 'orange', 'darkOrange', 'red', 'bordeux']);
-      await snap(data.join('\n'), 'sunset');
+    it('should support all available themes', async () => {
+      for (const theme in themes) {
+        const colors = Object.keys(themes[theme as keyof typeof themes]);
+        const custom = style({ theme });
+        const data = createPhrases(custom, colors);
+        await snap(data.join('\n'), `${theme} theme`);
+      }
     });
   });
 
@@ -151,23 +124,13 @@ describe('style', () => {
         theme: 'custom',
         colors: {
           custom: {
-            tom: '34355',
-            g: 'ee',
-            works: '#1e1e1e'
+            blueish: '#89CFF0',
+            orangish: '#FFA500',
           },
         }
       });
 
-
-      
-      // console.log(cc.custom.tom`hello`)
-      // cc.custom.tom`hello`
-
-      // const c = style({theme: 'custom', })
-
-      console.log(cc.pastel.green`hello there`)
-      console.log(cc.tom`hello there`)
-      const data = [cc.blueish`I am blueish`, cc.orangish`but I am so !orangish!`];
+      const data = [cc.blueish`I am blueish`, cc.custom.blueish`still blueish! asd`, cc.orangish`but I am so !orangish!`];
       await snap(data.join('\n'), 'custom partial color theme');
     });
   });

@@ -59,12 +59,23 @@ const themes = {
         cyan: '#4deeea',
         orange: '#ff5f1f'
     },
-    pinkish: {
+    thistle: {
         thistle: '#E0BBE4',
         lavender: '#957DAD',
         violet: '#D291BC',
         candy: '#FEC8D8',
         lumber: '#FFDFD3'
+    },
+    pinkish: {
+        misty: '#fadde1',
+        orchid: '#ffc4d6',
+        carnation: '#ffa6c1',
+        carnationer: '#ffacc5',
+        pink: '#ffcad4',
+        blossom: '#f4acb7',
+        bakermiller: '#ff97b7',
+        tickle: '#ff87ab',
+        rose: '#ff5d8f',
     },
     sunset: {
         yellow: '#ffb400',
@@ -73,6 +84,76 @@ const themes = {
         red: '#b41039',
         bordeux: '#420c30'
     },
+    summer: {
+        green: "#b6c037",
+        yellow: "#f2ff49",
+        orange: "#f9a146",
+        red: "#ff4242",
+        pink: "#fb62f6",
+        purple: "#b060e7",
+        blue: "#645dd7",
+        cyan: "#b3fffc",
+    },
+    autumn: {
+        black: '#03071e',
+        chocolate: '#370617',
+        rosewood: '#6a040f',
+        penn: '#9d0208',
+        engineering: '#d00000',
+        sinopia: '#dc2f02',
+        persimmon: '#e85d04',
+        princeton: '#f48c06',
+        pride: '#faa307',
+        porridge: '#ffba08',
+    },
+    mint: {
+        nyanza: '#d8f3dc',
+        celadon: '#b7e4c7',
+        celadoner: '#95d5b2',
+        minter: '#52b788',
+        mint: '#74c69d',
+        sea: '#40916c',
+        dartmouth: '#2d6a4f',
+        brunswick: '#1b4332',
+        dark: '#081c15',
+        
+    },
+    sport: {
+        white: '#ffffff',
+        night: '#0b090a',
+        eerie: '#161a1d',
+        blood: '#660708',
+        cornell: '#a4161a',
+        corneller: '#ba181b',
+        imperial: '#e5383b',
+        silver: '#b1a7a6',
+        timberwolf: '#d3d3d3',
+        smoke: '#f5f3f4',
+    },
+    rainbow: {
+        amethyst: '#8e6bc7',
+        tufts: '#018bda',
+        robin: '#00d7eb',
+        forest: '#48933e',
+        apple: '#76ac2f',
+        yellow: '#ffba24',
+        bittersweet: '#fd7268',
+        cmyk: '#eb1d19',
+        crimson: '#df013c',
+        folly: '#ff0561',
+    },
+    pool: {
+        violet: '#7400b8',
+        grape: '#6930c3',
+        slate: '#5e60ce',
+        united: '#5390d9',
+        picton: '#4ea8de',
+        aero: '#48bfe3',
+        sky: '#56cfe1',
+        tiffany: '#64dfdf',
+        turquoise: '#72efdd',
+        aquamarine: '#80ffdb',
+    }
 }
 
 export default themes;

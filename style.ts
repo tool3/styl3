@@ -2,7 +2,7 @@ import colorMap, { RESET } from './colors/colors';
 import { Colors } from './colors/types';
 import { decoratorFunctions, decoratorMap, symbolsFunctions } from './decorators/decorators';
 import { DecoratorMap } from './decorators/types';
-import { Config, Style } from './types/types';
+import { Config, Style, TemplateStringFunction } from './types/types';
 import { getValue } from './utils/utils';
 
 function hexToRgb(hex: string) {
@@ -56,7 +56,7 @@ function applySymbols(symbols: DecoratorMap, value: string, formattedColor: stri
     }, value)
 }
 
-function makeFunctions(colors: Colors, symbols: DecoratorMap) {
+function makeFunctions(colors: Colors, symbols: DecoratorMap): any {
     return Object.keys(colors).reduce((acc: any, color) => {
         if (typeof colors[color] === 'object') {
             acc[color] = makeFunctions(colors[color] as Colors, symbols);

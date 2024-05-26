@@ -1,4 +1,4 @@
-import { ColorFunctions, ColorUtils, ExportedColors } from '../colors/types';
+import { ColorFunctions, ColorUtils, Colors, ExportedColors } from '../colors/types';
 import { DecoratorFunctions, DecoratorMap } from '../decorators/types';
 import { ThemeFunctions, ThemeWithColors } from '../themes/types';
 import type style from '../style';
@@ -11,5 +11,5 @@ export type Config<T extends string, C> = {
     decorators?: Partial<DecoratorMap>;
 }
 
-export type Style<T extends string, C> = ColorUtils & ThemeWithColors<T, C> & ColorFunctions<T, C> & ThemeFunctions<T, C> & DecoratorFunctions;
+export type Style<T extends string, C> = ColorUtils &  Colors & ThemeWithColors<T, C> & ColorFunctions<T, C> & ThemeFunctions<T, C> & DecoratorFunctions;
 export default style;
