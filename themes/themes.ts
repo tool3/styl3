@@ -1,4 +1,17 @@
 const themes = {
+    default: {
+        red: [38, 5, 160],
+        green: 32,
+        yellow: [38, 5, 227],
+        blue: 34,
+        purple: 35,
+        cyan: 96,
+        pink: [38, 5, 219],
+        orange: [38, 5, 215],
+        marine: 94,
+        white: 97,
+        black: 30,
+    },
     pastel: {
         red: 31,
         green: [38, 5, 49],
@@ -59,30 +72,63 @@ const themes = {
         cyan: '#4deeea',
         orange: '#ff5f1f'
     },
-    thistle: {
-        thistle: '#E0BBE4',
-        lavender: '#957DAD',
-        violet: '#D291BC',
-        candy: '#FEC8D8',
-        lumber: '#FFDFD3'
+    spring: {
+        green: "#005f73",
+        cyan: "#0a9396",
+        blue: "#94d2bd",
+        vanilla: "#e9d8a6",
+        gamboge: "#ee9b00",
+        alloy: "#ca6702",
+        rust: "#bb3e03",
+        rufus: "#ae2012",
+        auburn: "#9b2226"
     },
     pinkish: {
-        misty: '#fadde1',
-        orchid: '#ffc4d6',
-        carnation: '#ffa6c1',
-        carnationer: '#ffacc5',
-        pink: '#ffcad4',
-        blossom: '#f4acb7',
-        bakermiller: '#ff97b7',
-        tickle: '#ff87ab',
-        rose: '#ff5d8f',
+        chocolate: "#590d22",
+        claret: "#800f2f",
+        purple: "#a4133c",
+        red: "#c9184a",
+        crayola: "#ff4d6d",
+        pink: "#ff758f",
+        salmon: "#ff8fa3",
+        cherry: "#ffb3c1",
+        pinker: "#ffccd5",
+        lavender: "#fff0f3"
+    },
+    crayons: {
+        red: "#f94144",
+        orange: "#f3722c",
+        carrot: "#f8961e",
+        coral: "#f9844a",
+        saffron: "#f9c74f",
+        pistachio: "#90be6d",
+        zomp: "#43aa8b",
+        cyan: "#4d908e",
+        gray: "#577590",
+        cerulean: "#277da1"
     },
     sunset: {
-        yellow: '#ffb400',
-        orange: '#e58637',
-        darkOrange: '#d6423b',
-        red: '#b41039',
-        bordeux: '#420c30'
+        tangelo: "#ff4800",
+        cook: "#ff5400",
+        pantone: "#ff6000",
+        pumpkin: "#ff6d00",
+        safety: "#ff7900",
+        uto: "#ff8500",
+        princeton: "#ff9100",
+        peel: "#ff9e00",
+        orange: "#ffaa00",
+        yellow: "#ffb600"
+    },
+    rufus: {
+        green: '#005f73',
+        cyan: '#0a9396',
+        blue: '#94d2bd',
+        vanilla: '#e9d8a6',
+        gamboge: '#ee9b00',
+        orange: '#ca6702',
+        rust: '#bb3e03',
+        rufous: '#ae2012',
+        auburn: '#9b2226',
     },
     summer: {
         green: "#b6c037",
@@ -95,7 +141,6 @@ const themes = {
         cyan: "#b3fffc",
     },
     autumn: {
-        black: '#03071e',
         chocolate: '#370617',
         rosewood: '#6a040f',
         penn: '#9d0208',
@@ -107,20 +152,29 @@ const themes = {
         porridge: '#ffba08',
     },
     mint: {
-        nyanza: '#d8f3dc',
-        celadon: '#b7e4c7',
-        celadoner: '#95d5b2',
-        minter: '#52b788',
-        mint: '#74c69d',
-        sea: '#40916c',
-        dartmouth: '#2d6a4f',
-        brunswick: '#1b4332',
-        dark: '#081c15',
-        
+        nyanza: "#d8f3dc",
+        celadon: "#b7e4c7",
+        celadoner: "#95d5b2",
+        minty: "#74c69d",
+        minter: "#52b788",
+        sea: "#40916c",
+        dartmouth: "#2d6a4f",
+        brunswick: "#1b4332",
+        green: "#081c15"
+    },
+    vintage: {
+        green: "#797d62",
+        moss: "#9b9b7a",
+        khaki: "#baa587",
+        desert: "#d9ae94",
+        peach: "#f1dca7",
+        sunglow: "#ffcb69",
+        yellow: "#e8ac65",
+        orange: "#d08c60",
+        chamoisee: "#b58463",
+        beaver: "#997b66"
     },
     sport: {
-        white: '#ffffff',
-        night: '#0b090a',
         eerie: '#161a1d',
         blood: '#660708',
         cornell: '#a4161a',
@@ -129,6 +183,7 @@ const themes = {
         silver: '#b1a7a6',
         timberwolf: '#d3d3d3',
         smoke: '#f5f3f4',
+        white: '#ffffff',
     },
     rainbow: {
         amethyst: '#8e6bc7',
@@ -153,6 +208,18 @@ const themes = {
         tiffany: '#64dfdf',
         turquoise: '#72efdd',
         aquamarine: '#80ffdb',
+    },
+    champagne: {
+        pink: '#eddcd2',
+        linen: '#fff1e6',
+        misty: '#fde2e4',
+        mimi: '#fad2e1',
+        cyan: '#c5dedd',
+        cream: '#dbe7e4',
+        isabelline: '#f0efeb',
+        alice: '#d6e2e9',
+        columbia: '#bcd4e6',
+        powder: '#99c1de',
     }
 }
 

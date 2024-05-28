@@ -2,7 +2,7 @@ import colorMap, { RESET } from './colors/colors';
 import { Colors } from './colors/types';
 import { decoratorFunctions, decoratorMap, symbolsFunctions } from './decorators/decorators';
 import { DecoratorMap } from './decorators/types';
-import { Config, Style, TemplateStringFunction } from './types/types';
+import { Config, Style } from './types/types';
 import { getValue } from './utils/utils';
 
 function hexToRgb(hex: string) {
@@ -46,9 +46,9 @@ function applySymbols(symbols: DecoratorMap, value: string, formattedColor: stri
         const regexString = `\\${symbol}(.*)\\` + symbol;
 
         const regex = new RegExp(regexString, 'gsm');
-        if (acc.match(regex)) {
+        if (acc && acc.match(regex)) {
             const [subject, stripped] = regex.exec(acc);
-            const replaced = symbolsFunctions[key](formattedColor + stripped + RESET + formattedColor);
+            const replaced = symbolsFunctions[key](formattedColor + stripped + formattedColor);
             acc = acc.replace(subject, replaced);
         }
 
@@ -116,7 +116,7 @@ function style<T extends string, C>(config?: Config<T, C>) {
 
     const colorCodes = makeColors(allColors);
     const themedColors = theme ? { ...colorCodes, ...(colorCodes[theme] as Colors) } : colorCodes;
-    if (!themedColors) throw new Error(`no such theme ${theme}`);
+    if (!themedColors) throw new Error(`no such theme ${theme.toString()}`);
     const functions = makeFunctions(themedColors, allSymbols);
     const styled: Style<T, C> = {
         colors: themedColors,

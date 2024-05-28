@@ -129,7 +129,7 @@ describe('style', () => {
           },
         }
       });
-
+      
       const data = [cc.blueish`I am blueish`, cc.custom.blueish`still blueish! asd`, cc.orangish`but I am so !orangish!`];
       await snap(data.join('\n'), 'custom partial color theme');
     });

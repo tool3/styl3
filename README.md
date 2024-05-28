@@ -4,44 +4,27 @@ themeable cli coloring
 
 # What's New
 
-✅ 15 built-in themes!
-✅ Formatting decorators (bold, italic, hidden, underline, strikeout and inverted)
-✅ Supports custom colors and custom themes!
-✅ Supports hex, rgb, or ansi color codes
-✅ Color conversion utils such as rgb/hex/ansi
+✅ 20 built-in [themes](#themes)!  
+✅ Formatting [decorators](#decorators)!  
+✅ Supports custom colors and custom themes!  
+✅ Supports hex, rgb, or ansi color codes  
+✅ Color conversion utils such as rgb/hex/ansi  
 ✅ Easy and flexible api
 
-# themes
-
-15 unique built-in themes to get you started on easy cli styling  
-[![](https://img.shields.io/static/v1?label=created%20with%20shellfie&message=📸&color=pink)](https://github.com/tool3/shellfie)
-
-| Theme    | Screenshot                           |
-| -------- | ------------------------------------ |
-| autumn   | ![](./shellfies/themes/autumn.png)   |
-| beach    | ![](./shellfies/themes/beach.png)    |
-| lush     | ![](./shellfies/themes/lush.png)     |
-| mint     | ![](./shellfies/themes/mint.png)     |
-| nature   | ![](./shellfies/themes/nature.png)   |
-| neon     | ![](./shellfies/themes/neon.png)     |
-| pastel   | ![](./shellfies/themes/pastel.png)   |
-| pinkish  | ![](./shellfies/themes/pinkish.png)  |
-| pool     | ![](./shellfies/themes/pool.png)     |
-| rainbow  | ![](./shellfies/themes/rainbow.png)  |
-| sport    | ![](./shellfies/themes/sport.png)    |
-| standard | ![](./shellfies/themes/standard.png) |
-| summer   | ![](./shellfies/themes/summer.png)   |
-| sunset   | ![](./shellfies/themes/sunset.png)   |
-| thistle  | ![](./shellfies/themes/thistle.png)  |
-
 ## usage
-
+`styl3` can provide color names as functions for coloring output and decorators for adding specific formatting for a given string.   
+for example:   
 ```typescript
-import style from 'styl3';
+import style from "styl3";
 
+const styled = style();
 
+const output = [
+  "*Never* gonna give you !up!",
+  "@Never@ gonna let you %down%",
+  "$Never$ gonna run around and desert you"
+];
 ```
-
 
 ```javascript
 const style = require("styl3");
@@ -135,3 +118,31 @@ const custom = style({
 // use custom colors
 console.log(s.green`this will be with #1b7504 color`);
 ```
+
+# themes
+
+15 unique built-in themes to get you started on easy cli styling  
+[![](https://img.shields.io/static/v1?label=created%20with%20shellfie&message=📸&color=pink)](https://github.com/tool3/shellfie)
+
+| Theme     | Screenshot                            |
+| --------- | ------------------------------------- |
+| autumn    | ![](./shellfies/themes/autumn.png)    |
+| beach     | ![](./shellfies/themes/beach.png)     |
+| champagne | ![](./shellfies/themes/champagne.png) |
+| crayons   | ![](./shellfies/themes/crayons.png)   |
+| lush      | ![](./shellfies/themes/lush.png)      |
+| mint      | ![](./shellfies/themes/mint.png)      |
+| nature    | ![](./shellfies/themes/nature.png)    |
+| neon      | ![](./shellfies/themes/neon.png)      |
+| pastel    | ![](./shellfies/themes/pastel.png)    |
+| pinkish   | ![](./shellfies/themes/pinkish.png)   |
+| pool      | ![](./shellfies/themes/pool.png)      |
+| rainbow   | ![](./shellfies/themes/rainbow.png)   |
+| rufus     | ![](./shellfies/themes/rufus.png)     |
+| sport     | ![](./shellfies/themes/sport.png)     |
+| spring    | ![](./shellfies/themes/spring.png)    |
+| summer    | ![](./shellfies/themes/summer.png)    |
+| sunset    | ![](./shellfies/themes/sunset.png)    |
+| vintage   | ![](./shellfies/themes/vintage.png)   |
+| standard  | ![](./shellfies/themes/standard.png)  |
+| default   | ![](./shellfies/themes/default.png)   |

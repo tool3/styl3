@@ -1,3 +1,4 @@
+import themes from '../themes/themes';
 import { CustomTheme } from '../themes/types';
 import { TemplateStringFunction } from '../types/types';
 
@@ -18,11 +19,11 @@ export type Colors = {
     black: Color;
 } & { [key: string]: Color | CustomTheme };
 
-export type ExportedColors<T extends string, C> = Colors & { [key in T]: Color | CustomTheme<C> };
+export type ExportedColors<T extends string, C> = Colors & { [key in T]: Color | CustomTheme<C> }
 
 export type ColorFunctions<T extends string, C> = {
     [key in keyof ExportedColors<T, C>]: TemplateStringFunction;
-} & { [key in keyof C]: TemplateStringFunction };
+} & { [key in keyof T]: TemplateStringFunction }
 
 export type ColorUtils = {
     rgb(r: number, g: number, b: number): TemplateStringFunction;

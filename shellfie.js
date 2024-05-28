@@ -1,5 +1,5 @@
 const shellfie = require('shellfie');
-const style = require('./dist/index.js')
+const styled = require('./dist/index.js')
 const themes = require('./dist/themes/themes.js').default;
 
 function createPhrases(styles, colors) {
@@ -14,11 +14,26 @@ function createPhrases(styles, colors) {
 }
 
 (async () => {
-    for (const theme in themes) {
-        const colors = Object.keys(themes[theme]);
-        const custom = style({ theme });
-        const data = createPhrases(custom, colors);
-        console.log(data.join('\n'));
-        await shellfie(data.join('\n'), { name: theme, location: `shellfies/themes/`, viewport: { width: 250, height: 300 } })
-    }
+    // for (const theme in themes) {
+    //     const colors = Object.keys(themes[theme]);
+    //     const custom = style({ theme });
+    //     const data = createPhrases(custom[theme], colors);
+    //     if (!data.length) {
+    //         debugger
+    //     }
+    //     console.log(data.join('\n'));
+    //     await shellfie(data.join('\n'), { name: theme, location: `shellfies/themes/`, viewport: { width: 250, height: 300 } })
+    // }
+
+    const colors = Object.keys(themes.crayons);
+    const custom = styled({ theme: 'crayons', colors });
+    
+    // const data = createPhrases(custom, colors);
+    const data = [
+        custom.green`@Never gonna ~give~ you !up!@`,
+        custom.crayons.carrot`@Never gonna let you %down%!@`,
+        custom.red`@$Never$ *gonna* run around and desert you@`
+    ]
+    console.log(data.join('\n'));
+    await shellfie(data.join('\n'), { name: 'crayons', location: `shellfies/`, viewport: { width: 250, height: 300 } })
 })()
