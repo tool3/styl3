@@ -11,5 +11,5 @@ export type Config<T extends string, C> = {
     decorators?: Partial<DecoratorMap>;
 }
 
-export type Style<T extends string, C> = ColorUtils & Colors & ThemeWithColors<T, C> & ColorFunctions<T, C> & ThemeFunctions<T, C> & ThemeWithCustomColorsFunctions<T, C> & ThemeWithCustomColors<C> & ThemeColorFunctions & DecoratorFunctions;
+export type Style<T extends string, C> = ColorUtils & Colors & ThemeWithColors<T, C> & ColorFunctions<T, C> & ThemeFunctions<T, C> &  ThemeWithCustomColors<C> & ThemeWithCustomColorsFunctions<T, C> & ThemeColorFunctions & DecoratorFunctions;
 export default style;

@@ -111,8 +111,11 @@ describe('style', () => {
     });
     it('should support partial custom color overrides', async () => {
       const cc = style({
+        theme: 'custom',
         colors: {
-          green: 35
+          custom: {
+            green: 35
+          }
         },
       });
       const data = [cc.green`I *should* be green`, cc.green`but I am so !purple!`];
@@ -132,6 +135,32 @@ describe('style', () => {
       
       const data = [cc.blueish`I am blueish`, cc.custom.blueish`still blueish! asd`, cc.orangish`but I am so !orangish!`];
       await snap(data.join('\n'), 'custom partial color theme');
+    });
+
+    it('should autocomplete colors', async () => {
+      const c = style({
+        theme: 'custom',
+        colors: {
+          custom: {
+            blueish: '#89CFF0',
+            orangish: '#FFA500',
+          },
+        }
+      });
+      
+      expect(c).to.have.property('blueish');
+      expect(c.custom).to.have.property('blueish');
+
+      const cc = style({
+        theme: 'crayons',
+      });
+
+        
+      expect(cc).to.have.property('saffron');
+      expect(cc.crayons).to.have.property('saffron');
+      
+      
+      // await snap(data.join('\n'), 'custom partial color theme');
     });
   });
 });

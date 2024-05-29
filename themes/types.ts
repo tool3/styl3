@@ -21,9 +21,9 @@ export type ThemeColorFunctions = {
 
 export type ThemeWithCustomColorsFunctions<T extends string, C> = {
     [key in T]: {
-        [key in keyof C]: TemplateStringFunction;
+        [X in keyof C]: TemplateStringFunction;
     }
-}
+} & { [key in keyof C]: TemplateStringFunction; }
 
 export type ThemeWithCustomColors<C> = {
     [key in keyof C]: TemplateStringFunction;

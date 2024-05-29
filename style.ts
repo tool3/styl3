@@ -114,7 +114,7 @@ function style<T extends string, C>(config?: Config<T, C>) {
     const allColors = { ...colorMap, ...colors };
     const allSymbols = { ...decoratorMap, ...decorators };
 
-    const colorCodes = makeColors(allColors);
+    const colorCodes = makeColors(allColors as Colors);
     const themedColors = theme ? { ...colorCodes, ...(colorCodes[theme] as Colors) } : colorCodes;
     if (!themedColors) throw new Error(`no such theme ${theme.toString()}`);
     const functions = makeFunctions(themedColors, allSymbols);

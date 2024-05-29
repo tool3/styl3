@@ -26,14 +26,16 @@ function createPhrases(styles, colors) {
     // }
 
     const colors = Object.keys(themes.crayons);
-    const custom = styled({ theme: 'crayons', colors });
+    const custom = styled({ theme: 'crayons' });
     
     // const data = createPhrases(custom, colors);
     const data = [
-        custom.green`@Never gonna ~give~ you !up!@`,
-        custom.crayons.carrot`@Never gonna let you %down%!@`,
-        custom.red`@$Never$ *gonna* run around and desert you@`
+        custom.neon.purple`@*Never* gonna give you !up!@`,
+        custom.pastel.pink`@Never gonna let you %down%@`,
+        custom.rainbow.amethyst`@$Never$ gonna run ~around~ and *desert* you@`
     ]
+    
+    
     console.log(data.join('\n'));
-    await shellfie(data.join('\n'), { name: 'crayons', location: `shellfies/`, viewport: { width: 250, height: 300 } })
+    await shellfie(data.join('\n'), { name: 'test', location: `shellfies/`, viewport: { width: 400, height: 200 } })
 })()
