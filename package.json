@@ -1,9 +1,13 @@
 {
   "name": "styl3",
   "version": "3.1.0",
-  "description": "cli style manager",
+  "description": "terminal styling",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tool3/styl3"
+  },
   "scripts": {
     "test": "mocha -r ts-node/register index.test.ts",
     "build": "tsc",
