@@ -1,38 +1,60 @@
-import { RESET } from '../colors/colors';
-import { getValue } from '../utils/utils';
-import { DecoratorFunctions, DecoratorMap } from './types';
+import { getValue, replaceColor } from '../utils/utils';
+import { DecoratorFunctions, DecoratorMap, SymbolMap, SymbolResetMap } from './types';
 
 const decoratorMap: DecoratorMap = {
     bold: '*',
-    underline: '!',
     dim: '~',
-    hidden: '#',
-    invert: '@',
-    blink: '^',
     italic: '%',
+    underline: '!',
+    blink: '^',
+    invert: '@',
+    hidden: '#',
     strikeout: '$'
 };
 
+export const symbolMap: SymbolMap = {
+    bold: 1,
+    dim: 2,
+    italic: 3,
+    underline: 4,
+    blink: 5,
+    invert: 7,
+    hidden: 8,
+    strikeout: 9
+};
+
+export const symbolResets: SymbolResetMap = {
+    bold: 22,
+    dim: 22,
+    italic: 23,
+    underline: 24,
+    blink: 25,
+    invert: 27,
+    hidden: 28,
+    strikeout: 29
+};
+
+
 const symbolsFunctions: DecoratorFunctions = {
-    bold: (color: string) => color.replace('m', ';1m'),
-    dim: (color: string) => color.replace('m', ';2m'),
-    italic: (color: string) => color.replace('m', ';3m'),
-    underline: (color: string) => color.replace('m', ';4m'),
-    blink: (color: string) => color.replace('m', ';5m'),
-    invert: (color: string) => color.replace('m', ';7m'),
-    hidden: (color: string) => color.replace('m', ';8m'),
-    strikeout: (color: string) => color.replace('m', ';9m')
+    bold: (color: string) => replaceColor('bold', color),
+    dim: (color: string) => replaceColor('dim', color),
+    italic: (color: string) => replaceColor('italic', color),
+    underline: (color: string) => replaceColor('underline', color),
+    blink: (color: string) => replaceColor('blink', color),
+    invert: (color: string) => replaceColor('invert', color),
+    hidden: (color: string) => replaceColor('hidden', color),
+    strikeout: (color: string) => replaceColor('strikeout', color),
 };
 
 const decoratorFunctions: DecoratorFunctions = {
-    bold: (txt: TemplateStringsArray, ...args: string[]) => getValue(txt, ...args).replace('m', ';1m'),
-    dim: (txt: TemplateStringsArray, ...args: string[]) => `\x1b[;2m${getValue(txt, ...args)}${RESET}`,
-    italic: (txt: TemplateStringsArray, ...args: string[]) => getValue(txt, ...args).replace('m', ';3m'),
-    underline: (txt: TemplateStringsArray, ...args: string[]) => getValue(txt, ...args).replace('m', ';4m'),
-    blink: (txt: TemplateStringsArray, ...args: string[]) => getValue(txt, ...args).replace('m', ';5m'),
-    invert: (txt: TemplateStringsArray, ...args: string[]) => getValue(txt, ...args).replace('m', ';7m'),
-    hidden: (txt: TemplateStringsArray, ...args: string[]) => getValue(txt, ...args).replace('m', ';8m'),
-    strikeout: (txt: TemplateStringsArray, ...args: string[]) => getValue(txt, ...args).replace('m', ';9m')
+    bold: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.bold(getValue(txt, ...args)),
+    dim: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.dim(getValue(txt, ...args)),
+    italic: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.italic(getValue(txt, ...args)),
+    underline: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.underline(getValue(txt, ...args)),
+    blink: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.blink(getValue(txt, ...args)),
+    invert: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.invert(getValue(txt, ...args)),
+    hidden: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.hidden(getValue(txt, ...args)),
+    strikeout: (txt: TemplateStringsArray, ...args: string[]) => symbolsFunctions.strikeout(getValue(txt, ...args))
 };
 
-export { decoratorMap, symbolsFunctions, decoratorFunctions }
+export { decoratorFunctions, decoratorMap, symbolsFunctions };
