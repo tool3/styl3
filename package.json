@@ -1,6 +1,6 @@
 {
   "name": "styl3",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "cli style manager",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
