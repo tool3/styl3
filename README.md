@@ -12,19 +12,23 @@ themeable cli coloring
 ✅ Easy and flexible api
 
 ## usage
-`styl3` can provide color names as functions for coloring output and decorators for adding specific formatting for a given string.   
-for example:   
+
+`styl3` can provide color names as functions for coloring output and decorators for adding specific formatting for a given string.  
+for example:
+
 ```typescript
 import style from "styl3";
 
 const styled = style();
 
 const output = [
-  "*Never* gonna give you !up!",
-  "@Never@ gonna let you %down%",
-  "$Never$ gonna run around and desert you"
+  "@*Never* gonna give you !up!@",
+  "@Never gonna %let you down%@",
+  "@$Never$ gonna run around and *desert* you@"
 ];
 ```
+
+![](./shellfies/rick.png)
 
 ```javascript
 const style = require("styl3");
@@ -36,7 +40,7 @@ console.log(s.pastel.green`this will be a pastel green`);
 
 const ss = style({ theme: "pastel" });
 // now `ss.green` points to the pastel green
-// allowing to change theme for the entire cli with one string
+
 console.log(ss.green`also a pastel green`);
 
 // supports custom hex
@@ -45,7 +49,7 @@ console.log(ss.hex("#de5285")`this will be a slick pink`);
 console.log(ss.rgb(15, 106, 251)`this will be a rich blue`);
 ```
 
-<img src="./shellfies/themes.png" width="300" height="300" />
+![](./shellfies/themes.png)
 
 # decorators
 
@@ -83,7 +87,7 @@ console.log(s.green`viva la %italic%`);
 console.log(s.pink`address: ~you@somewhere.earth~`);
 ```
 
-<img src="./shellfies/decorators.png" width="300" height="300" />
+![](./shellfies/decorators.png)
 
 you can also provide your own custom decorators map:
 

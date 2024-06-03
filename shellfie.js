@@ -31,11 +31,11 @@ function createPhrases(styles, colors) {
     // const data = createPhrases(custom, colors);
     const data = [
         custom.neon.purple`@*Never* gonna give you !up!@`,
-        custom.pastel.pink`@Never gonna let you %down%@`,
-        custom.rainbow.amethyst`@$Never$ gonna run ~around~ and *desert* you@`
+        custom.pastel.pink`@Never gonna %let you down%@`,
+        custom.rainbow.amethyst`@$Never$ gonna run around and *desert* you@`
     ]
     
     
     console.log(data.join('\n'));
-    await shellfie(data.join('\n'), { name: 'test', location: `shellfies/`, viewport: { width: 400, height: 200 } })
+    await shellfie(data.join('\n'), { name: 'rick', location: `shellfies/`, viewport: { width: 400, height: 200 } })
 })()
