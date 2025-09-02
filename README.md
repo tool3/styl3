@@ -1,4 +1,4 @@
-# styl3 3.0
+# styl3 3.2.0
 
 themeable cli coloring
 
@@ -10,6 +10,7 @@ themeable cli coloring
 ✅ Supports hex, rgb, or ansi color codes  
 ✅ Color conversion utils such as rgb/hex/ansi  
 ✅ Easy and flexible api
+✅ New write and timestamp options!
 
 ## usage
 
@@ -101,8 +102,9 @@ console.log(s.red`this will now be _BOLD_`);
 
 you can also provide your own color theme:
 
-```javascript
-const style = require("styl3");
+```typescript
+import style from `styl3`;
+
 const custom = style({
   theme: "custom",
   colors: {
@@ -150,3 +152,37 @@ console.log(s.green`this will be with #1b7504 color`);
 | vintage   | ![](./shellfies/themes/vintage.png)   |
 | standard  | ![](./shellfies/themes/standard.png)  |
 | default   | ![](./shellfies/themes/default.png)   |
+
+# options
+
+`styl3` 3.2.0 introduces 2 new options for quality of life.
+
+## `write`
+
+using this option set to true - `styl3` will perform the console.log for you.
+
+## `timestamp`
+
+using this option `styl3` will add a timestamp to each print using the time it is printed.  
+primarily aimed at logging use-cases.
+
+### example
+
+```typescript
+import style from `styl3`
+
+const styled = style({
+  write: true,
+  timestamp: {
+    format: {  dateStyle: 'short', timeStyle: 'short' },
+    color: 'blue'
+  }
+});
+
+const a = styled.blue`this will be logged out - no need to wrap in console.log`
+// a still has the string formatted just in case you need it :)
+
+styled.red`log is red but timestamp is blue`
+// [9/2/25, 4:49 PM] log is red but timestamp is blue
+
+```

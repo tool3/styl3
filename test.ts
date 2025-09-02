@@ -8,11 +8,16 @@ const styled = style({
   //   }
   // }
   theme: 'crayons',
-  write: true
+  write: true,
+  timestamp: {
+    format: {  dateStyle: 'short', timeStyle: 'short' },
+    color: 'blue'
+  }
 });
 
 
-// console.log(styled.neon.purple`@*Never* gonna give you !up!@`)
+styled.red`*Never* gonna give you !up!`;
+styled.neon.purple`@*Never* gonna give you !up!@`
 // console.log(styled.pastel.pink`@Never gonna let you %down%@`),
 // console.log(styled.rainbow.amethyst`@$Never$ gonna run around and desert you@`)
 styled.rainbow.amethyst`@$Never$ gonna run around and desert you@`

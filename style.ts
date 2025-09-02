@@ -2,7 +2,7 @@ import colorMap, { RESET } from './colors/colors';
 import { Colors } from './colors/types';
 import { decoratorFunctions, decoratorMap, symbolsFunctions } from './decorators/decorators';
 import { DecoratorMap } from './decorators/types';
-import { Config, Style } from './types/types';
+import { Config, Options, Style } from './types/types';
 import { getValue } from './utils/utils';
 
 function hexToRgb(hex: string) {
@@ -56,18 +56,33 @@ function applySymbols(symbols: DecoratorMap, value: string, formattedColor: stri
     }, value)
 }
 
-function makeFunctions(colors: Colors, symbols: DecoratorMap, write = false): any {
+function getValueWithTimestamp(value: string, timestamp: Options['timestamp'], colors: Colors, formattedColor: string) {
+    if (timestamp) {
+        const format = timestamp?.format;
+        const dateString = new Intl.DateTimeFormat('en', format).format(Date.now());
+        const color = timestamp.color && timestamp.color in colors ? colors[timestamp.color] : formattedColor;
+        const dateWithColor = timestamp?.color ? `${color}[${dateString}]${RESET}` : `[${dateString}]`;
+        const valueWithDate = `${dateWithColor} ${value}`;
+        return valueWithDate;
+    }
+
+    return value;
+}
+
+function makeFunctions(colors: Colors, symbols: DecoratorMap, options: Options): any {
     return Object.keys(colors).reduce((acc: any, color) => {
         if (typeof colors[color] === 'object') {
-            acc[color] = makeFunctions(colors[color] as Colors, symbols, write);
+            acc[color] = makeFunctions(colors[color] as Colors, symbols, options);
             return acc;
         }
         acc[color] = function (text: string | TemplateStringsArray, ...args: string[]) {
             const formattedColor = colors[color] as string;
-            const value = typeof text === "string" ? text : getValue(text, ...args);
+            const rawValue = typeof text === "string" ? text : getValue(text, ...args);
+            const value = getValueWithTimestamp(rawValue, options.timestamp, colors, formattedColor);
             const formattedValue = applySymbols(symbols, value, formattedColor);
             const log = `${formattedColor}${formattedValue}${RESET}`;
-            if (write) console.log(log);
+
+            if (options.write) console.log(log);
 
             return log;
         };
@@ -111,15 +126,15 @@ function ansi(ansi: string) {
 }
 
 function style<T extends string, C>(config?: Config<T, C>) {
-    const { colors, theme, decorators, write } = config || { decorators: decoratorMap, colors: colorMap, theme: 'default' };
-
+    const { colors, theme, decorators, write, timestamp } = config || { decorators: decoratorMap, colors: colorMap, theme: 'default' };
+    const options = { write, timestamp }
     const allColors = { ...colorMap, ...colors };
     const allSymbols = { ...decoratorMap, ...decorators };
 
     const colorCodes = makeColors(allColors as Colors);
     const themedColors = theme ? { ...colorCodes, ...(colorCodes[theme] as Colors) } : colorCodes;
     if (!themedColors) throw new Error(`no such theme ${theme.toString()}`);
-    const functions = makeFunctions(themedColors, allSymbols, write);
+    const functions = makeFunctions(themedColors, allSymbols, options);
     const styled: Style<T, C> = {
         colors: themedColors,
         symbols: allSymbols,
