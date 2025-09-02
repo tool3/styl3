@@ -56,18 +56,20 @@ function applySymbols(symbols: DecoratorMap, value: string, formattedColor: stri
     }, value)
 }
 
-function makeFunctions(colors: Colors, symbols: DecoratorMap): any {
+function makeFunctions(colors: Colors, symbols: DecoratorMap, write = false): any {
     return Object.keys(colors).reduce((acc: any, color) => {
         if (typeof colors[color] === 'object') {
-            acc[color] = makeFunctions(colors[color] as Colors, symbols);
+            acc[color] = makeFunctions(colors[color] as Colors, symbols, write);
             return acc;
         }
         acc[color] = function (text: string | TemplateStringsArray, ...args: string[]) {
             const formattedColor = colors[color] as string;
             const value = typeof text === "string" ? text : getValue(text, ...args);
             const formattedValue = applySymbols(symbols, value, formattedColor);
+            const log = `${formattedColor}${formattedValue}${RESET}`;
+            if (write) console.log(log);
 
-            return `${formattedColor}${formattedValue}${RESET}`;
+            return log;
         };
         return acc;
     }, {});
@@ -109,7 +111,7 @@ function ansi(ansi: string) {
 }
 
 function style<T extends string, C>(config?: Config<T, C>) {
-    const { colors, theme, decorators } = config || { decorators: decoratorMap, colors: colorMap, theme: 'default' };
+    const { colors, theme, decorators, write } = config || { decorators: decoratorMap, colors: colorMap, theme: 'default' };
 
     const allColors = { ...colorMap, ...colors };
     const allSymbols = { ...decoratorMap, ...decorators };
@@ -117,7 +119,7 @@ function style<T extends string, C>(config?: Config<T, C>) {
     const colorCodes = makeColors(allColors as Colors);
     const themedColors = theme ? { ...colorCodes, ...(colorCodes[theme] as Colors) } : colorCodes;
     if (!themedColors) throw new Error(`no such theme ${theme.toString()}`);
-    const functions = makeFunctions(themedColors, allSymbols);
+    const functions = makeFunctions(themedColors, allSymbols, write);
     const styled: Style<T, C> = {
         colors: themedColors,
         symbols: allSymbols,

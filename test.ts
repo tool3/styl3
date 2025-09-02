@@ -7,13 +7,15 @@ const styled = style({
   //     redRain: 'somecolor'
   //   }
   // }
-  theme: 'crayons'
+  theme: 'crayons',
+  write: true
 });
 
 
-console.log(styled.neon.purple`@*Never* gonna give you !up!@`)
-console.log(styled.pastel.pink`@Never gonna let you %down%@`),
-console.log(styled.rainbow.amethyst`@$Never$ gonna run around and desert you@`)
+// console.log(styled.neon.purple`@*Never* gonna give you !up!@`)
+// console.log(styled.pastel.pink`@Never gonna let you %down%@`),
+// console.log(styled.rainbow.amethyst`@$Never$ gonna run around and desert you@`)
+styled.rainbow.amethyst`@$Never$ gonna run around and desert you@`
 // console.log(styled```@Never gonna ~give~ you !up!@`);
 // console.log(styled.purple`@Never gonna let you %down%!@`);
 // console.log(styled.pink`@$Never$ *gonna* run around and desert you@`);
